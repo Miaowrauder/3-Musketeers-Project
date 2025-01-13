@@ -18,7 +18,7 @@ public class EnemyMove : MonoBehaviour
     void Start()
     {
         mainhandEnabled = true;
-        mainhandEnabled = false;
+        offhandEnabled = true;
         plObject = GameObject.FindWithTag("Player");
         navAgent = GetComponent<NavMeshAgent>();
     }
@@ -51,7 +51,7 @@ public class EnemyMove : MonoBehaviour
     {
         plObject.GetComponent<plHealth>().incomingMeleeDmg = damageAmount;
 
-        if (plObject.GetComponent<plHealth>().meleeIframes == 0f)
+        if ((plObject.GetComponent<plHealth>().meleeIframes <= 0f) && (plObject.GetComponent<plHealth>().isMeleeParrying == false))
         {
         plObject.GetComponent<plHealth>().meleeIframes = iFrames;
         }

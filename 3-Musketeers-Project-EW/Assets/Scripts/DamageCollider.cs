@@ -27,7 +27,7 @@ public class DamageCollider : MonoBehaviour
     {
         transform.localScale = new Vector3(scale, scale, scale);
 
-        if((lifespan > 0) && (isDestroying == false));
+        if((lifespan > 0) && (isDestroying == false))
         {
             StartCoroutine(DestroySelf());
         }
