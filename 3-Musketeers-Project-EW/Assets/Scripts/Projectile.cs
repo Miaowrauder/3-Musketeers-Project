@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class Projectile : MonoBehaviour
     public float moveSpeed;
     public float rangedDmg;
     public GameObject self;
+
+    public float appliedIframes;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,7 @@ public class Projectile : MonoBehaviour
             if((coll.transform.GetComponent<plHealth>().rangedIframes) == 0)
             {
             coll.transform.GetComponent<plHealth>().incomingRangedDmg = (rangedDmg);
+            coll.transform.GetComponent<plHealth>().rangedIframes = (appliedIframes);
             }
 
             Destroy(self);
@@ -54,7 +58,10 @@ public class Projectile : MonoBehaviour
             else if(coll.transform.GetComponent<BlockCollider>().canDeflect == true)
             {
                 isEnemy = false;
-                moveSpeed -= (moveSpeed*2);
+                self.transform.position = coll.transform.position;
+                self.transform.LookAt(coll.GetComponent<BlockCollider>().deflectionDirection.transform.position);
+                rb.velocity = Vector3.zero;
+                rb.AddForce(transform.forward * (moveSpeed*2), ForceMode.Impulse);
             }
         }
         }
@@ -64,6 +71,7 @@ public class Projectile : MonoBehaviour
             if(coll.tag == "Enemy")
             {
             coll.transform.GetComponent<Health>().incomingDmg = (rangedDmg*(coll.GetComponent<Health>().dmgRecievedMult));
+            coll.transform.GetComponent<Health>().iFrames = (appliedIframes);
             Destroy(self);
             }
         }

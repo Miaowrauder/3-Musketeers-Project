@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -38,6 +39,8 @@ public class plHealth : MonoBehaviour
 
     public bool canCountdown;
 
+    public GameObject head;
+
     void Start()
     {
         health = maxHealth;
@@ -72,12 +75,12 @@ public class plHealth : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && rangedParryEnabled && (rangedParryLevel > 0) && !isRangedParrying && (rangedParryCd <= 0))
         {
             isRangedParrying = true;
-            rangedParryCd = 2f;
+            rangedParryCd = 6f;
 
-            barrier = Instantiate(deflectPrefab, deflectPosition.transform.position, Quaternion.identity);
+            barrier = Instantiate(deflectPrefab, deflectPosition.transform.position, deflectPosition.transform.rotation);
+            barrier.transform.parent = head.transform;
 
             barrier.GetComponent<BlockCollider>().lifespan = deflectDuration;
-            barrier.GetComponent<BlockCollider>().isDestroying = true;
             
             if(rangedParryLevel > 1)
             {

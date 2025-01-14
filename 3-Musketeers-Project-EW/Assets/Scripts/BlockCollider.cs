@@ -8,6 +8,8 @@ public class BlockCollider : MonoBehaviour
     public bool isDestroying;
     public float lifespan;
     public bool canDeflect;
+
+    public Transform deflectionDirection;
     // Start is called before the first frame update
     void Start()
     {
