@@ -12,6 +12,7 @@ public class Health : MonoBehaviour
     public bool canCountdown;
     public float dmgRecievedMult;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +51,7 @@ public class Health : MonoBehaviour
     {             
         hp -= incomingDmg;
         incomingDmg = 0;
-        isDamageable = false;      
+        isDamageable = false;   
     }
 
     private IEnumerator IframeCounter()

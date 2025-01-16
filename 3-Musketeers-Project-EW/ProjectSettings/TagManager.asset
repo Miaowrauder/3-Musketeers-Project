@@ -11,6 +11,8 @@ TagManager:
   - Enemy
   - Limb
   - Blocker
+  - GrenadePickup
+  - ConsumablePickup
   layers:
   - Default
   - TransparentFX

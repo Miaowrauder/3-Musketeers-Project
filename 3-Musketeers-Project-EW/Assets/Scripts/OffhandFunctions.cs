@@ -8,11 +8,8 @@ public class OffhandFunctions : MonoBehaviour
 
     public GameObject[] abilityItems;
 
-    public GameObject previewGrenade;
-
-    GameObject item;
-
-    public bool offhandEnabled, hasGrenade, hasSalve, hasMusket, isScaling;
+    public GameObject previewGrenade, item; //current held item, dont change in editor
+    public bool offhandEnabled, hasGrenade, hasSalve, hasMusket, isScaling, isConsuming;
     
     public int abilityID;
 
@@ -25,6 +22,7 @@ public class OffhandFunctions : MonoBehaviour
         hasGrenade = false;
         hasSalve = false;
         hasMusket = false;
+        throwForce = baseThrowForce;
     }
 
        void Update()
@@ -113,7 +111,7 @@ public class OffhandFunctions : MonoBehaviour
             preview.GetComponent<Grenade>().isPrimed = true;
 
         yield return new WaitForSeconds(0.5f);
-        throwForce += 2;
+        throwForce += 1.5f;
 
         isScaling = false;
     }

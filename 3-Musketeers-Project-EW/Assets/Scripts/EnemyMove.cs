@@ -5,8 +5,15 @@ using UnityEngine.AI;
 
 public class EnemyMove : MonoBehaviour
 {
-    public float damageAmount, attackDelay, attackRate, attackDistance, health, iFrames;
-    public bool mainhandEnabled, offhandEnabled;
+    public float damageAmount, attackDelay, iFrames;
+    public bool mainhandEnabled, offhandEnabled, isRanged, isMagic, isMelee, isGrenadier, isAttacking;
+    public GameObject musketBall;
+    public Transform shootingPos;
+
+    [Header("RangedStats")]
+    public float bulletSpeed;
+    public float bulletDamage;
+
 
     GameObject plObject;
 
@@ -29,17 +36,12 @@ public class EnemyMove : MonoBehaviour
         head.transform.LookAt(plObject.transform.position);
         Move();
 
-        // to be redone
-        if (Time.time > attackDelay)
-        {
-            if (Vector3.Distance(plObject.transform.position, transform.position) <= attackDistance)
+            if(mainhandEnabled && !isAttacking)
             {
-                if(mainhandEnabled)
-                {
-                Attack();
-                }
+            StartCoroutine(Attack());
             }
-        }
+            
+        
     }
 
     void Move()
@@ -47,14 +49,32 @@ public class EnemyMove : MonoBehaviour
         navAgent.destination = plObject.transform.position;
     }
 
-    void Attack()
+    private IEnumerator Attack()
     {
-        plObject.GetComponent<plHealth>().incomingMeleeDmg = damageAmount;
+        isAttacking = true;
 
-        if ((plObject.GetComponent<plHealth>().meleeIframes <= 0f) && (plObject.GetComponent<plHealth>().isMeleeParrying == false))
+        yield return new WaitForSeconds(attackDelay);
+
+        if(isRanged)
         {
-        plObject.GetComponent<plHealth>().meleeIframes = iFrames;
+            GameObject proj = Instantiate(musketBall, shootingPos.transform.position, shootingPos.transform.rotation);
+            proj.GetComponent<Projectile>().moveSpeed = bulletSpeed;
+            proj.GetComponent<Projectile>().rangedDmg = bulletDamage;
+            proj.GetComponent<Projectile>().lifespan = 5f;
+            proj.GetComponent<Projectile>().appliedIframes = 0.05f;
+            proj.GetComponent<Projectile>().isEnemy = true;
         }
-        attackDelay = Time.time + attackRate;
+
+        
+
+        isAttacking = false;
+        //plObject.GetComponent<plHealth>().incomingMeleeDmg = damageAmount;
+
+        //if ((plObject.GetComponent<plHealth>().meleeIframes <= 0f) && (plObject.GetComponent<plHealth>().isMeleeParrying == false))
+        //{
+        //plObject.GetComponent<plHealth>().meleeIframes = iFrames;
+        //}
+        //attackDelay = Time.time + attackRate;
     }
+
 }

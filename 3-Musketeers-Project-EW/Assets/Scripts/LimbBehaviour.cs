@@ -8,7 +8,7 @@ public class LimbBehaviour : MonoBehaviour
     public bool isMainhand, isOffhand, isLeg, isActive;
     public GameObject host;
     
-    public float hp;
+    public float hp, bleedPercentHp;
     float maxHp;
 
     public float iFrames;
@@ -47,7 +47,7 @@ public class LimbBehaviour : MonoBehaviour
         if (hp <= 0f)
         {
             //to be replaced with bleed
-            host.GetComponent<Health>().hp -= maxHp/4;
+            host.GetComponent<StatusManager>().DotDmg[2] += (maxHp*(bleedPercentHp/200));
             self.GetComponent<Rigidbody>().isKinematic = false;
 
             if (isLeg)

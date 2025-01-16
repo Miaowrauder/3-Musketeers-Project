@@ -7,7 +7,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     Rigidbody rb;
-    public bool isEnemy;
+    public bool isEnemy, isDestroying;
     public float lifespan;
     public float moveSpeed;
     public float rangedDmg;
@@ -19,18 +19,22 @@ public class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * moveSpeed, ForceMode.Impulse);
-        DestroySelf();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(lifespan > 0.001 && !isDestroying)
+        {
+            StartCoroutine(DestroySelf());
+        }
     }
 
     private IEnumerator DestroySelf()
     {
+
+        isDestroying = true;
         yield return new WaitForSeconds(lifespan);
         Destroy(self);
     }
@@ -62,6 +66,7 @@ public class Projectile : MonoBehaviour
                 self.transform.LookAt(coll.GetComponent<BlockCollider>().deflectionDirection.transform.position);
                 rb.velocity = Vector3.zero;
                 rb.AddForce(transform.forward * (moveSpeed*2), ForceMode.Impulse);
+                rangedDmg *= 2f;
             }
         }
         }

@@ -110,4 +110,4 @@ MonoBehaviour:
   shellPrefab: {fileID: 6292791887878437478, guid: c28b8139724cd3d4ab5dae45aa86d71d,
     type: 3}
   isPrimed: 0
-  AOEscale: 2
+  AOEscale: 3
