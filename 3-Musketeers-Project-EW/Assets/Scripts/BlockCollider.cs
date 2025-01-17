@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlockCollider : MonoBehaviour
 {
-    public GameObject self;
+    public GameObject self, player;
     public bool isDestroying;
     public float lifespan;
     public bool canDeflect;
@@ -13,7 +13,7 @@ public class BlockCollider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -28,6 +28,7 @@ public class BlockCollider : MonoBehaviour
     private IEnumerator DestroySelf()
     {
         isDestroying = true;
+        player.GetComponent<plHealth>().isRangedParrying = false;
         yield return new WaitForSeconds(lifespan);
         Destroy(self);
     }

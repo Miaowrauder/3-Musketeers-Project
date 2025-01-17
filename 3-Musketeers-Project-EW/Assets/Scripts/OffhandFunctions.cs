@@ -28,11 +28,6 @@ public class OffhandFunctions : MonoBehaviour
        void Update()
     {
 
-        if(Input.GetKeyDown(KeyCode.F) && (hand.transform.childCount == 0))
-        {
-
-        }
-
         if (Input.GetKeyDown(KeyCode.T) && (cooldownManager.GetComponent<cooldownManager>().choiceCD == 0) && (hand.transform.childCount == 0))
         {   
             //summons item corresponding to choice ability id in hand
