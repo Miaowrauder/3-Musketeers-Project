@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(lifespan > 0.001 && !isDestroying)
+        if(lifespan > 0 && !isDestroying)
         {
             StartCoroutine(DestroySelf());
         }
@@ -75,8 +75,11 @@ public class Projectile : MonoBehaviour
         {
             if(coll.tag == "Enemy")
             {
-            coll.transform.GetComponent<Health>().incomingDmg = (rangedDmg*(coll.GetComponent<Health>().dmgRecievedMult));
-            coll.transform.GetComponent<Health>().iFrames = (appliedIframes);
+                if((coll.transform.GetComponent<Health>().iFrames) <= 0f)
+                {
+                coll.transform.GetComponent<Health>().incomingDmg = (rangedDmg*(coll.GetComponent<Health>().dmgRecievedMult));
+                coll.transform.GetComponent<Health>().iFrames = (appliedIframes);
+                }
             Destroy(self);
             }
         }

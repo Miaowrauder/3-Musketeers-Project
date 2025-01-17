@@ -3884,7 +3884,7 @@ MonoBehaviour:
   incomingRangedDmg: 0
   rangedParryCd: 0
   deflectDuration: 0.3
-  rangedParryLevel: 1
+  rangedParryLevel: 2
   rangedIframes: 0
   deflectPrefab: {fileID: 8905666570851080222, guid: ed242c7e29f8b7b40ad615616a108b52,
     type: 3}

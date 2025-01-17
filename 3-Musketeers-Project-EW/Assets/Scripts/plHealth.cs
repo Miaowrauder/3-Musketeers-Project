@@ -125,11 +125,6 @@ public class plHealth : MonoBehaviour
         {
             incomingRangedDmg = 0f;
             isRangedable = true;
-
-            if(isRangedParrying)
-            {
-                isRangedParrying = false;
-            }
         }
         if (magicIframes == 0f)
         {
@@ -228,8 +223,6 @@ public class plHealth : MonoBehaviour
 
      void TakeRangedDmg()
     {
-        if(!isRangedParrying)
-        {
 
         if (incomingRangedDmg <= 5f)
         {
@@ -244,19 +237,6 @@ public class plHealth : MonoBehaviour
             isRangedable = false;
         }
 
-        }
-
-        if(isRangedParrying)
-        {
-            incomingRangedDmg = 0;
-            isRangedParrying = false;
-            rangedParryCd = 6f;
-
-            if(rangedParryLevel > 1)
-            {
-                //upgrade effect
-            }
-        }
     }
 
     private IEnumerator Counter()
@@ -293,11 +273,6 @@ public class plHealth : MonoBehaviour
         if(rangedParryCd > 0)
         {
             rangedParryCd -= 0.05f;
-        }
-
-        if(deflectDuration > 0)
-        {
-
         }
 
         canCountdown = true;
