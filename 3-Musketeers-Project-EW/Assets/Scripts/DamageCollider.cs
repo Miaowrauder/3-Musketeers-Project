@@ -15,7 +15,7 @@ public class DamageCollider : MonoBehaviour
 
     bool isDestroying;
 
-    public bool canBreak;
+    public bool canBreak, isEnemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +42,8 @@ public class DamageCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider coll)
     {
+        if(!isEnemy)
+        {
         if (coll.tag == "Enemy")
         {
             coll.transform.GetComponent<Health>().incomingDmg = ((meleeDmg*(coll.GetComponent<Health>().dmgRecievedMult)) + (rangedDmg*(coll.GetComponent<Health>().dmgRecievedMult)) + magicDmg);
@@ -52,6 +54,25 @@ public class DamageCollider : MonoBehaviour
         {
             coll.transform.GetComponent<LimbBehaviour>().incomingDmg = ((meleeDmg*(coll.GetComponent<LimbBehaviour>().dmgRecievedMult)) + (rangedDmg*(coll.GetComponent<LimbBehaviour>().dmgRecievedMult)) + magicDmg);
             coll.transform.GetComponent<LimbBehaviour>().iFrames = (lifespan+0.01f);
+        }
+        }
+        else if(isEnemy && (coll.tag == "Player"))
+        {
+            if(((coll.transform.GetComponent<plHealth>().rangedIframes) == 0) && (rangedDmg > 0))
+            {
+            coll.transform.GetComponent<plHealth>().incomingRangedDmg = (rangedDmg);
+            coll.transform.GetComponent<plHealth>().rangedIframes = (lifespan+0.01f);
+            }
+            if(((coll.transform.GetComponent<plHealth>().meleeIframes) == 0) && (meleeDmg > 0))
+            {
+            coll.transform.GetComponent<plHealth>().incomingMeleeDmg = (meleeDmg);
+            coll.transform.GetComponent<plHealth>().meleeIframes = (lifespan+0.01f);
+            }
+            if(((coll.transform.GetComponent<plHealth>().magicIframes) == 0) && (magicDmg > 0))
+            {
+            coll.transform.GetComponent<plHealth>().incomingMagicDmg = (magicDmg);
+            coll.transform.GetComponent<plHealth>().magicIframes = (lifespan+0.01f);
+            }
         }
     }
 }

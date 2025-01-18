@@ -37,17 +37,17 @@ public class OffhandFunctions : MonoBehaviour
             item.transform.rotation = hand.transform.rotation;
             item.GetComponent<Rigidbody>().isKinematic = true;
 
-            if(abilityID == 0)
+            if((abilityID >= 0) && (abilityID <= 1))
             {
                 hasGrenade = true;
             }
 
-            if(abilityID == 1)
+            if((abilityID == 999))
             {
                 hasMusket = true;
             }
 
-            if(abilityID == 2)
+            if((abilityID >= 2) && (abilityID <= 3))
             {
                 hasSalve = true;
             }
@@ -65,6 +65,10 @@ public class OffhandFunctions : MonoBehaviour
             }
             }
 
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {       
             if(hasMusket)
             {
 
@@ -72,7 +76,7 @@ public class OffhandFunctions : MonoBehaviour
 
             if(hasSalve)
             {
-
+                isConsuming = true;              
             }
         }
 
@@ -82,9 +86,9 @@ public class OffhandFunctions : MonoBehaviour
             
             item.GetComponent<Rigidbody>().isKinematic = false;
             //-up is forward
-            item.gameObject.GetComponent<Rigidbody>().AddForce(item.transform.up * -throwForce, ForceMode.Impulse);
+            item.gameObject.GetComponent<Rigidbody>().AddForce(item.transform.forward * throwForce, ForceMode.Impulse);
             //negative forward is up
-            item.gameObject.GetComponent<Rigidbody>().AddForce(item.transform.forward * -(throwForce/2), ForceMode.Impulse);
+            item.gameObject.GetComponent<Rigidbody>().AddForce(item.transform.up * (throwForce/2), ForceMode.Impulse);
             item.gameObject.transform.parent = null;
             item.GetComponent<Grenade>().isPrimed = true;
             throwForce = baseThrowForce;
@@ -100,8 +104,8 @@ public class OffhandFunctions : MonoBehaviour
         GameObject preview = Instantiate(previewGrenade, hand.transform.position, hand.transform.rotation);
 
             preview.GetComponent<Rigidbody>().isKinematic = false;
-            preview.gameObject.GetComponent<Rigidbody>().AddForce(preview.transform.up * -throwForce, ForceMode.Impulse);
-            preview.gameObject.GetComponent<Rigidbody>().AddForce(preview.transform.forward * -(throwForce/2), ForceMode.Impulse);
+            preview.gameObject.GetComponent<Rigidbody>().AddForce(preview.transform.forward * throwForce, ForceMode.Impulse);
+            preview.gameObject.GetComponent<Rigidbody>().AddForce(preview.transform.up * (throwForce/2), ForceMode.Impulse);
             preview.gameObject.transform.parent = null;
             preview.GetComponent<Grenade>().isPrimed = true;
 

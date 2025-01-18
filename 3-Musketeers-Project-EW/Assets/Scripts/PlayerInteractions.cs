@@ -39,7 +39,7 @@ public class PlayerInteractions : MonoBehaviour
                     hit.collider.gameObject.tag = "Untagged";
                     hit.collider.gameObject.transform.position = hand.transform.position;
                     hit.collider.gameObject.transform.rotation = hand.transform.rotation;
-                    StartCoroutine(miniDelay());
+                    StartCoroutine(miniDelayGrenade());
                     
                 }
                 else if((hit.collider.gameObject.CompareTag("ConsumablePickup")) && (Input.GetKeyDown(KeyCode.F)))
@@ -51,6 +51,8 @@ public class PlayerInteractions : MonoBehaviour
                     hit.collider.gameObject.tag = "Untagged";
                     hit.collider.gameObject.transform.position = hand.transform.position;
                     hit.collider.gameObject.transform.rotation = hand.transform.rotation;
+                    hit.collider.gameObject.GetComponent<Salve>().inHand = true;
+                    StartCoroutine(miniDelaySalve());
                     
                 }
                 
@@ -65,10 +67,15 @@ public class PlayerInteractions : MonoBehaviour
     }
 
     //to prevent grenade being thrown after pickup
-    public IEnumerator miniDelay()
+    public IEnumerator miniDelayGrenade()
     {
         yield return new WaitForSeconds(0.5f);
         player.GetComponent<OffhandFunctions>().hasGrenade = true;
+    }
+    public IEnumerator miniDelaySalve()
+    {
+        yield return new WaitForSeconds(0.3f);
+        player.GetComponent<OffhandFunctions>().hasSalve = true;
     }
 }
 

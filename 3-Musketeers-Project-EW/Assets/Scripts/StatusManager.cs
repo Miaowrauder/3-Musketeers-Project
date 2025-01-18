@@ -14,16 +14,18 @@ public class StatusManager : MonoBehaviour
         DotDmg[0] = 0f;
         DotDmg[1] = 0f;
         DotDmg[2] = 0f;
+        DotDmg[3] = 0f;
 
         DotDuration[0] = 0f;
         DotDuration[1] = 0f;
+        DotDuration[3] = 0f;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if( (((DotDuration[0]) > 0f) || ((DotDuration[1]) > 0f) || ((DotDmg[2]) > 0f)) && (isTicking == false))
+        if( (((DotDuration[0]) > 0f) || ((DotDuration[1]) > 0f) || ((DotDmg[2]) > 0f) || ((DotDuration[3]) > 0f)) && (isTicking == false))
         {
             StartCoroutine(tickDown());
         }
@@ -36,6 +38,11 @@ public class StatusManager : MonoBehaviour
         if(DotDuration[1] <= 0f)
         {
             DotDmg[1] = 0f;
+        }
+
+        if(DotDuration[3] <= 0f)
+        {
+            DotDmg[3] = 0f;
         }
 
         // poison wearoff
@@ -90,6 +97,21 @@ public class StatusManager : MonoBehaviour
         if(DotDmg[2] > 0)
         {    
              self.GetComponent<Health>().hp -= DotDmg[2];         
+        }
+
+        if(DotDuration[3] >= 0.5f)
+        {
+            DotDuration[3] -= 0.5f;
+
+            if(isEnemy)
+            {
+                self.GetComponent<Health>().hp += DotDmg[3];
+            }
+            else if (!isEnemy)
+            {
+                self.GetComponent<plHealth>().health += DotDmg[3];
+
+            }
         }
 
         yield return new WaitForSeconds(0.5f);
