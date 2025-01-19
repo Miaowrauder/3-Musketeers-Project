@@ -13,6 +13,8 @@ TagManager:
   - Blocker
   - GrenadePickup
   - ConsumablePickup
+  - SpawnSpot
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX

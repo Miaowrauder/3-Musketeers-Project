@@ -38,8 +38,7 @@ public class plHealth : MonoBehaviour
     public Slider healthSlider;
 
     public bool canCountdown;
-
-    public GameObject head;
+    public GameObject head, manager;
 
     void Start()
     {
@@ -164,7 +163,8 @@ public class plHealth : MonoBehaviour
     void GameOver()
     {
         //reloads scene, to be replaced with back to main menu and character reset
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Destroy(manager);
+        SceneManager.LoadScene("Testing Scene");
     }
 
     void TakeMagicDmg()

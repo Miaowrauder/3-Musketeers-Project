@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public int extraJumps;
     public int jumpLimit;
-    public bool isSprinting;
+    public bool isSprinting, canMove;
     Vector2 inputs;
 
     public CharacterController controller;
@@ -31,10 +31,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(canMove)
+        {
         Move();
         Jump();
         Rotation();
         Sprint();
+        }
+        else if(!canMove)
+        {
+            StartCoroutine(MoveLock());
+        }
     }
 
     void Move()
@@ -102,6 +109,12 @@ public class PlayerController : MonoBehaviour
             moveSpeed = baseSpeed;
         }
 
+    }
+
+    public IEnumerator MoveLock()
+    {
+        yield return new WaitForSeconds(0.1f);
+        canMove = true;
     }
 
 }

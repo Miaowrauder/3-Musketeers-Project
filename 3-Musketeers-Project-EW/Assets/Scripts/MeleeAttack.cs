@@ -47,7 +47,7 @@ public class MeleeAttack : MonoBehaviour
         
         GameObject hitbox = Instantiate(hitboxPrefab, hitboxPos.transform.position, hitboxPos.transform.rotation);
         hitbox.transform.parent = swordArm.transform;
-        hitbox.GetComponent<DamageCollider>().meleeDmg = (damageStat + 10f);
+        hitbox.GetComponent<DamageCollider>().meleeDmg = (damageStat + 15f);
         hitbox.GetComponent<DamageCollider>().lifespan = (attackSpeedStat * 0.2f);
         hitbox.GetComponent<DamageCollider>().scale = (hitboxScale);
         hitbox.GetComponent<DamageCollider>().canBreak = true;

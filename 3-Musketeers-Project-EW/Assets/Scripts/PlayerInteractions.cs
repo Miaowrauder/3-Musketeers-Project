@@ -11,11 +11,12 @@ public class PlayerInteractions : MonoBehaviour
 
     RaycastHit hit;
 
-    GameManager gmSc;
+    public GameManager gmSc;
     // Start is called before the first frame update
     void Start()
     {
-        gmSc = GameObject.Find("GameManager/DND").GetComponent<GameManager>();
+        gmSc = null;
+        gmSc = GameObject.Find("GameManager_DND").GetComponent<GameManager>();
         gmSc.infoText.text = " ";
     }
 
