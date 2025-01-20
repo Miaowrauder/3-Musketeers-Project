@@ -873,6 +873,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager_DND
       objectReference: {fileID: 0}
+    - target: {fileID: 4327164642833093033, guid: a84ecb2a87370e04f9dd331b6b426b8a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Upgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 4424307943153036549, guid: a84ecb2a87370e04f9dd331b6b426b8a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Upgrade
+      objectReference: {fileID: 0}
     - target: {fileID: 4457001694832446286, guid: a84ecb2a87370e04f9dd331b6b426b8a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -923,6 +933,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5512050531386876951, guid: a84ecb2a87370e04f9dd331b6b426b8a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Upgrade
+      objectReference: {fileID: 0}
     - target: {fileID: 5949838021485166958, guid: a84ecb2a87370e04f9dd331b6b426b8a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -941,7 +956,7 @@ PrefabInstance:
     - target: {fileID: 6276387047270601571, guid: a84ecb2a87370e04f9dd331b6b426b8a,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 2535
+      value: 2538
       objectReference: {fileID: 0}
     - target: {fileID: 6710553775203915415, guid: a84ecb2a87370e04f9dd331b6b426b8a,
         type: 3}
@@ -951,7 +966,7 @@ PrefabInstance:
     - target: {fileID: 6710553775203915415, guid: a84ecb2a87370e04f9dd331b6b426b8a,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 2660
+      value: 2663
       objectReference: {fileID: 0}
     - target: {fileID: 7162064096521701901, guid: a84ecb2a87370e04f9dd331b6b426b8a,
         type: 3}

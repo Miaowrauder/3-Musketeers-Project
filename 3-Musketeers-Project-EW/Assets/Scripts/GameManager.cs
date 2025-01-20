@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
         inGameCanvas.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         UI.GetComponent<UImanager>().canLoad = true;
+        UI.GetComponent<UImanager>().reroll = true;
     }
 
 }

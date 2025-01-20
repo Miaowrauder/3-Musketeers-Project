@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 public class UImanager : MonoBehaviour
 {
     public GameObject GameM;
-    public bool canLoad;
+    public bool canLoad, reroll;
 
-    public int sceneNumber;
+    public int sceneNumber, upgradeID;
+
+    public int[] randomIDs;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +22,52 @@ public class UImanager : MonoBehaviour
     {
         if((sceneNumber == 0) && canLoad)
         {
-            onUpgrade();
+            OnEnd();
             canLoad = false;
+        }
+
+        if(reroll)
+        {
+            //randomIDs[0] = (Random.Range())
         }
     }
 
-    public void onUpgrade()
+    public void OnEnd()
     {
+
+        sceneNumber +=1;
+        //upgrade effects
+        SceneManager.LoadScene("Scene 1");
+        
+    }
+
+    public void Upgrade()
+    {
+
+        sceneNumber +=1;
+        //upgrade effects
+        SceneManager.LoadScene("Scene 1");
+        
+    }
+    public void onUpgrade1()
+    {
+
+        
+        
+    }
+
+    public void onUpgrade2()
+    {
+
+        sceneNumber +=1;
+        //upgrade effects
+        SceneManager.LoadScene("Scene 1");
+        
+    }
+
+    public void onUpgrade3()
+    {
+
         sceneNumber +=1;
         //upgrade effects
         SceneManager.LoadScene("Scene 1");
