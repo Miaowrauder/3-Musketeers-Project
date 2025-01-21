@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
         inGameCanvas.enabled = true;
         intiateSpawn = true;
         Cursor.lockState = CursorLockMode.Locked;
-        canEnd = true;
     }
 
     // Update is called once per frame
@@ -133,6 +132,7 @@ public class GameManager : MonoBehaviour
         }
 
         waveCount -= 1;
+        canEnd = true;
         intiateSpawn = false;
     }
 

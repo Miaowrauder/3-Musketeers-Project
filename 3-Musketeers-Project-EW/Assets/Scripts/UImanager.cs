@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class UImanager : MonoBehaviour
 {
-    public GameObject GameM;
+    public GameObject GameM, pl;
     public bool canLoad, reroll;
 
     public int sceneNumber, upgradeID;
@@ -30,6 +30,8 @@ public class UImanager : MonoBehaviour
         {
             //randomIDs[0] = (Random.Range())
         }
+
+
     }
 
     public void OnEnd()
@@ -73,4 +75,6 @@ public class UImanager : MonoBehaviour
         SceneManager.LoadScene("Scene 1");
         
     }
+
+    
 }

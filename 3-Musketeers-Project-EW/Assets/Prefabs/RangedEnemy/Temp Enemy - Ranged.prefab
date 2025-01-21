@@ -1111,7 +1111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDelay: 2
   iFrames: 0
-  attackDistance: 12
+  attackDistance: 15
   mainhandEnabled: 1
   offhandEnabled: 0
   isRanged: 1

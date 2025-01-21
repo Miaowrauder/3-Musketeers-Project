@@ -114,4 +114,4 @@ MonoBehaviour:
   hasBeenDeflected: 0
   isMagic: 0
   isStatus: 1
-  AOEscale: 4
+  AOEscale: 5
