@@ -15,7 +15,7 @@ public class DamageCollider : MonoBehaviour
 
     bool isDestroying;
 
-    public bool canBreak, isEnemy;
+    public bool canBreak, isEnemy, isIcon;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +37,7 @@ public class DamageCollider : MonoBehaviour
     {
         isDestroying = true;
         yield return new WaitForSeconds(lifespan);
+        if(isIcon)
         Destroy(self);
     }
 
