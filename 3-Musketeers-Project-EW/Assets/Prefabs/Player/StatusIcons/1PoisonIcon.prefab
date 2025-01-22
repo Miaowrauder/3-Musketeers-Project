@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2521554191205398260}
   - component: {fileID: 8052404038527168102}
   m_Layer: 5
-  m_Name: 0PoisonIcon
+  m_Name: 1PoisonIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,11 +89,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   self: {fileID: 3204361875038279342}
+  pl: {fileID: 0}
   scale: 1
   meleeDmg: 0
   rangedDmg: 0
   magicDmg: 0
   lifespan: 0
   tempTEST: 0
+  iconID: 1
   canBreak: 0
   isEnemy: 0
+  isIcon: 1

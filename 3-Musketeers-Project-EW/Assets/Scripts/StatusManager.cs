@@ -38,19 +38,28 @@ public class StatusManager : MonoBehaviour
 
         if(DotDuration[0] <= 0f)
         {
+            if(!isEnemy)
+            {
             canSet[0] = true;
+            }
             DotDmg[0] = 0f;
         }
 
         if(DotDuration[1] <= 0f)
         {
+            if(!isEnemy)
+            {
             canSet[1] = true;
+            }
             DotDmg[1] = 0f;
         }
 
         if(DotDuration[3] <= 0f)
         {
+            if(!isEnemy)
+            {
             canSet[3] = true;
+            }
             DotDmg[3] = 0f;
         }
 
@@ -76,7 +85,7 @@ public class StatusManager : MonoBehaviour
 
         if(DotDuration[0] >= 0.5f)
         {
-            if(canSet[0])
+            if(canSet[0] && (!isEnemy))
             {
                 getStatus[0] = true;
             }
@@ -100,7 +109,7 @@ public class StatusManager : MonoBehaviour
 
         if(DotDuration[1] >= 0.5f)
         {
-            if(canSet[1])
+            if(canSet[1] && (!isEnemy))
             {
                 getStatus[1] = true;
             }
@@ -125,7 +134,7 @@ public class StatusManager : MonoBehaviour
 
         if(DotDuration[3] >= 0.5f)
         {
-            if(canSet[3])
+            if(canSet[3] && (!isEnemy))
             {
                 getStatus[3] = true;
             }
@@ -156,8 +165,8 @@ public class StatusManager : MonoBehaviour
             {
              GameObject icon = Instantiate(buffDebuffIcons[buffDebuffID], buffDebuffSlots[b].transform.position, Quaternion.identity);
              icon.transform.parent = buffDebuffSlots[b];
-             icon.GetComponent<DamageCollider>().lifespan = DotDuration[buffDebuffID];
              b = buffDebuffSlots.Length;
+             canSet[buffDebuffID] = false;
              getStatus[buffDebuffID] = false;           
             }
         }

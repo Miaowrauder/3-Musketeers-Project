@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07c4961d11d218498472f5f254fc8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuseDelay: 2
+  fuseDelay: 3
   self: {fileID: 1305427439286086946}
   boomPrefab: {fileID: 2309893758193197899, guid: ae4d2c3568816ce4baa0298e7c40970e,
     type: 3}
@@ -112,4 +112,6 @@ MonoBehaviour:
   isPrimed: 0
   isEnemy: 1
   hasBeenDeflected: 0
-  AOEscale: 3
+  isMagic: 0
+  isStatus: 0
+  AOEscale: 5

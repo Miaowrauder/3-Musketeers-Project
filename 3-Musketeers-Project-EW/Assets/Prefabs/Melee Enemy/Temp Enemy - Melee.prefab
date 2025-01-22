@@ -203,6 +203,21 @@ MonoBehaviour:
   - 0
   isTicking: 0
   isEnemy: 1
+  getStatus: 0000000000
+  buffDebuffID: 0
+  buffDebuffIcons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  buffDebuffSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  canSet: 0000000000
 --- !u!1 &1453620607150136850
 GameObject:
   m_ObjectHideFlags: 0

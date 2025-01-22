@@ -33,7 +33,7 @@ public class EnemyMove : MonoBehaviour
     
 
 
-    GameObject plObject;
+    GameObject plObject, gm;
 
     public GameObject head;
 
@@ -42,6 +42,10 @@ public class EnemyMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gm = GameObject.Find("GameManager_DND");
+
+        bulletDamage *= (0.5f + gm.GetComponent<GameManager>().difficultyScaling);
+        swordDmg *= (0.5f + gm.GetComponent<GameManager>().difficultyScaling);
         mainhandEnabled = true;
         offhandEnabled = true;
         plObject = GameObject.FindWithTag("Player");

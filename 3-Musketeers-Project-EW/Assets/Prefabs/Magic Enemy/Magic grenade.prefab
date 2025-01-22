@@ -113,4 +113,5 @@ MonoBehaviour:
   isEnemy: 1
   hasBeenDeflected: 0
   isMagic: 1
-  AOEscale: 2
+  isStatus: 0
+  AOEscale: 2.3

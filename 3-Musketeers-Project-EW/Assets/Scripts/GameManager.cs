@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public float difficultyScaling, waveCount, enemyCount;
 
-    public bool intiateSpawn, enterScene;
+    public bool intiateSpawn, enterScene, isTesting;
 
     public GameObject[] enemySet, spawnSpots, plSpawn;
 
@@ -35,7 +35,11 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         endCanvas.enabled = false;
         inGameCanvas.enabled = true;
+
+        if(!isTesting)
+        {
         UI.GetComponent<UImanager>().canLoad = true;
+        }
         
     }
 

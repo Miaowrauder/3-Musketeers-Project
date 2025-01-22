@@ -26,9 +26,9 @@ public class LimbBehaviour : MonoBehaviour
     {
         isActive = true;
         scale = 1f;
+        canCountdown = true;
         hp = ((host.GetComponent<Health>().hp)/2f);
         dmgRecievedMult = (host.GetComponent<Health>().dmgRecievedMult);
-        canCountdown = true;
         isDamageable = true;
         maxHp = hp;
     }

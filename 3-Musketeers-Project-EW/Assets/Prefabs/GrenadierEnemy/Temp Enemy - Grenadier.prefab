@@ -34,6 +34,9 @@ Transform:
   - {fileID: 5811118666523475533}
   - {fileID: 1242982810737279255}
   - {fileID: 5821862331490534117}
+  - {fileID: 8878471092318443204}
+  - {fileID: 4441381718843989882}
+  - {fileID: 7697481141332666463}
   m_Father: {fileID: 5721151873082129449}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9178743893761503863
@@ -964,11 +967,11 @@ Transform:
   m_GameObject: {fileID: 6273288998713330656}
   serializedVersion: 2
   m_LocalRotation: {x: 0.023799513, y: -0.7946706, z: 0.0068174256, w: 0.6065359}
-  m_LocalPosition: {x: 0.165, y: -1.297, z: -0.308}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.33253384, y: -3.8573935, z: -0.62073}
+  m_LocalScale: {x: 2.0153568, y: 2.0153568, z: 2.015357}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5721151873082129449}
+  m_Father: {fileID: 472205781902860760}
   m_LocalEulerAnglesHint: {x: 2.276, y: -105.328, z: -1.695}
 --- !u!114 &7000118265365601846
 MonoBehaviour:
@@ -2415,12 +2418,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7562987502898945390}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.013, z: 0}
-  m_LocalScale: {x: 0.64560896, y: 0.854448, z: 0.22247925}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.2696749, z: 0}
+  m_LocalScale: {x: 1.3011326, y: 1.7220178, z: 0.44837514}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5721151873082129449}
+  m_Father: {fileID: 472205781902860760}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7483469802143004762
 MeshFilter:
@@ -2508,9 +2511,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8878471092318443204}
-  - {fileID: 4441381718843989882}
-  - {fileID: 7697481141332666463}
   - {fileID: 472205781902860760}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2675,6 +2675,16 @@ MonoBehaviour:
   - 0
   isTicking: 0
   isEnemy: 1
+  getStatus: 0000000000
+  buffDebuffID: 0
+  buffDebuffIcons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  buffDebuffSlots: []
+  canSet: 0000000000
 --- !u!1 &8543088546613265711
 GameObject:
   m_ObjectHideFlags: 0
@@ -2707,11 +2717,11 @@ Transform:
   m_GameObject: {fileID: 8543088546613265711}
   serializedVersion: 2
   m_LocalRotation: {x: -0.017339814, y: -0.7933071, z: -0.047026493, w: 0.606755}
-  m_LocalPosition: {x: -0.344, y: -1.283, z: -0.385}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.69328254, y: -3.8291783, z: -0.7759124}
+  m_LocalScale: {x: 2.0153568, y: 2.015357, z: 2.015357}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5721151873082129449}
+  m_Father: {fileID: 472205781902860760}
   m_LocalEulerAnglesHint: {x: -5.489, y: -105.098, z: -1.701}
 --- !u!114 &1844708703270533163
 MonoBehaviour:

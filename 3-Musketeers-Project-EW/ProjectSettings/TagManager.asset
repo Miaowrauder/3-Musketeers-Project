@@ -15,6 +15,7 @@ TagManager:
   - ConsumablePickup
   - SpawnSpot
   - PlayerSpawn
+  - Breakable
   layers:
   - Default
   - TransparentFX

@@ -30,7 +30,7 @@ public class MeleeAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && (currentlyAttacking == false) && (attackEnabled) && (mainhandEnabled))
+        if (Input.GetKey(KeyCode.Mouse0) && (currentlyAttacking == false) && (attackEnabled) && (mainhandEnabled))
         {
             StartCoroutine(Attack());
         }

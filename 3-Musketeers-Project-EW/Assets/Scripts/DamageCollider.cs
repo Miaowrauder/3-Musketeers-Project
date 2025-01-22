@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class DamageCollider : MonoBehaviour
 {
-    public GameObject self;
+    public GameObject self, pl;
+    GameObject gm;
     public float scale;
     public float meleeDmg;
     public float rangedDmg;
     public float magicDmg;
     public float lifespan;
 
-    public int tempTEST;
+    public int tempTEST, iconID;
 
     bool isDestroying;
 
     public bool canBreak, isEnemy, isIcon;
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        gm = GameObject.Find("GameManager_DND");
+
+        if(isEnemy)
+        {
+            meleeDmg *= (0.5f + gm.GetComponent<GameManager>().difficultyScaling);
+            rangedDmg *= (0.5f + gm.GetComponent<GameManager>().difficultyScaling);
+            magicDmg *= (0.5f + gm.GetComponent<GameManager>().difficultyScaling);
+        }
+    }
     void Start()
     {
+        
+            pl = GameObject.FindWithTag("Player");
         
     }
 
@@ -27,9 +42,14 @@ public class DamageCollider : MonoBehaviour
     {
         transform.localScale = new Vector3(scale, scale, scale);
 
-        if((lifespan > 0) && (isDestroying == false))
+        if((lifespan > 0) && (isDestroying == false) && !isIcon)
         {
             StartCoroutine(DestroySelf());
+        }
+
+        if(isIcon)
+        {
+        IconDestroy();
         }
     }
 
@@ -37,7 +57,6 @@ public class DamageCollider : MonoBehaviour
     {
         isDestroying = true;
         yield return new WaitForSeconds(lifespan);
-        if(isIcon)
         Destroy(self);
     }
 
@@ -55,6 +74,12 @@ public class DamageCollider : MonoBehaviour
         {
             coll.transform.GetComponent<LimbBehaviour>().incomingDmg = ((meleeDmg*(coll.GetComponent<LimbBehaviour>().dmgRecievedMult)) + (rangedDmg*(coll.GetComponent<LimbBehaviour>().dmgRecievedMult)) + magicDmg);
             coll.transform.GetComponent<LimbBehaviour>().iFrames = (lifespan+0.01f);
+        }
+
+        if ((coll.tag == "Breakable") && canBreak)
+        {
+            coll.transform.GetComponent<Breakable>().incomingDmg = (meleeDmg + rangedDmg+ magicDmg);
+            coll.transform.GetComponent<Breakable>().iFrames = (lifespan+0.01f);
         }
         }
         else if(isEnemy && (coll.tag == "Player"))
@@ -74,6 +99,14 @@ public class DamageCollider : MonoBehaviour
             coll.transform.GetComponent<plHealth>().incomingMagicDmg = (magicDmg);
             coll.transform.GetComponent<plHealth>().magicIframes = (lifespan+0.01f);
             }
+        }
+    }
+
+    void IconDestroy()
+    {
+        if(pl.GetComponent<StatusManager>().DotDuration[iconID] == 0f)
+        {
+            Destroy(self);
         }
     }
 }

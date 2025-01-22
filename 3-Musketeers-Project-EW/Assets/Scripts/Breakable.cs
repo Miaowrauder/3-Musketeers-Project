@@ -2,44 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Breakable : MonoBehaviour
 {
-    public float hp;
-    float maxHp;
-    public float iFrames;
-    public float incomingDmg;
-    public bool isDamageable;
-    public bool canCountdown;
-    public float dmgRecievedMult;
-
-    GameObject gm;
-
-
+    public float hp, maxHp;
+    public float incomingDmg, iFrames;
+    bool isDamageable, canCountdown;
+    public GameObject item;
     // Start is called before the first frame update
     void Start()
     {
-        gm = GameObject.Find("GameManager_DND");
-        hp *= (0.5f + gm.GetComponent<GameManager>().difficultyScaling/2f);
+        hp = maxHp;
         canCountdown = true;
-        isDamageable = true;
-        maxHp = hp;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if((incomingDmg > 0f) && (isDamageable))
         {
             TakeDmg();
         }
-    
-        if (hp <= 0f)
-        {
-            Destroy(gameObject); 
-        }
 
-        if (iFrames > 0)
+         if (iFrames > 0f)
         {
             if (canCountdown)
             {
@@ -47,15 +31,18 @@ public class Health : MonoBehaviour
             }
         }
 
+        if (hp <= 0f)
+        {
+            item.GetComponent<Rigidbody>().isKinematic = false;
+            Destroy(this.gameObject);
+        }
     }
 
-        
-
-    void TakeDmg()
+     void TakeDmg()
     {             
         hp -= incomingDmg;
-        incomingDmg = 0;
-        isDamageable = false;   
+        incomingDmg = 0f;
+        isDamageable = false;      
     }
 
     private IEnumerator IframeCounter()
@@ -65,7 +52,7 @@ public class Health : MonoBehaviour
 
         yield return new WaitForSeconds(iFrames);
 
-        iFrames = 0;
+        iFrames = 0f;
 
         incomingDmg = 0f;
 

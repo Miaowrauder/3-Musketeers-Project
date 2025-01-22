@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectID: 1
-  effectDuration: 10
+  effectDuration: 5
   pl: {fileID: 0}
   inHand: 1
 --- !u!54 &1607925886927565066

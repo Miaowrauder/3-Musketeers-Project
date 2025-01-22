@@ -11,7 +11,7 @@ public class OffhandFunctions : MonoBehaviour
     public GameObject previewGrenade, item; //current held item, dont change in editor
     public bool offhandEnabled, hasGrenade, hasSalve, hasMusket, isScaling, isConsuming;
     
-    public int abilityID;
+    public int abilityID, choiceLevel;
 
     public GameObject cooldownManager;
 
