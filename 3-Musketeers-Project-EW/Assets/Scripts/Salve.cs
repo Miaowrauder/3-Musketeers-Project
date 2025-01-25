@@ -41,9 +41,9 @@ public class Salve : MonoBehaviour
         }
         if(effectID == 1)
         {
-            //regen 20hp over 10s base
+            //regen 10hp over 10s base
             pl.GetComponent<StatusManager>().DotDuration[3] = effectDuration;
-            pl.GetComponent<StatusManager>().DotDmg[3] = 1f;
+            pl.GetComponent<StatusManager>().DotDmg[3] = (0.5f * (pl.GetComponent<OffhandFunctions>().choiceLevel + 1));
 
             pl.GetComponent<OffhandFunctions>().isConsuming = false;
             pl.GetComponent<OffhandFunctions>().hasSalve = false;

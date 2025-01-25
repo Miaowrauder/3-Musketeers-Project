@@ -31,6 +31,7 @@ public class OffhandFunctions : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T) && (cooldownManager.GetComponent<cooldownManager>().choiceCD == 0) && (hand.transform.childCount == 0))
         {   
             //summons item corresponding to choice ability id in hand
+            cooldownManager.GetComponent<cooldownManager>().choiceCD = (16 - (2*choiceLevel));
             item = Instantiate(abilityItems[abilityID], hand.transform.position, Quaternion.identity);
             item.transform.parent = hand.transform;
             item.transform.position = hand.transform.position;

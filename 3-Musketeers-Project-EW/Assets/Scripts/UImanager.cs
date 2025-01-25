@@ -163,57 +163,57 @@ public class UImanager : MonoBehaviour
         }
 
         //health upgrade
-        if(randomIDs[0] == 3)
+        if((randomIDs[0] == 3) || (randomIDs[0] == 16))
         {
             buttonString[0] = "Improve & Restore Thy Good Health";
         }
-        if(randomIDs[1] == 3)
+        if((randomIDs[1] == 3) || (randomIDs[1] == 16))
         {
             buttonString[1] = "Improve & Restore Thy Good Health";
         }
-        if(randomIDs[2] == 3)
+        if((randomIDs[2] == 3) || (randomIDs[2] == 16))
         {
             buttonString[2] = "Improve & Restore Thy Good Health";
         }
 
         //attack speed
-        if(randomIDs[0] == 4)
+        if((randomIDs[0] == 4) || (randomIDs[0] == 17))
         {
             buttonString[0] = "Quicken The Pace Of Thy Strikes";
         }
-        if(randomIDs[1] == 4)
+        if((randomIDs[1] == 4) || (randomIDs[1] == 17))
         {
             buttonString[1] = "Quicken The Pace Of Thy Strikes";
         }
-        if(randomIDs[2] == 4)
+        if((randomIDs[2] == 4) || (randomIDs[2] == 17))
         {
             buttonString[2] = "Quicken The Pace Of Thy Strikes";
         }
 
         //defence stat
-        if(randomIDs[0] == 5)
+        if((randomIDs[0] == 5) || (randomIDs[0] == 18))
         {
             buttonString[0] = "Fortify Thy Bodily Defences";
         }
-        if(randomIDs[1] == 5)
+        if((randomIDs[1] == 5) || (randomIDs[1] == 18))
         {
             buttonString[1] = "Fortify Thy Bodily Defences";
         }
-        if(randomIDs[2] == 5)
+        if((randomIDs[2] == 5) || (randomIDs[2] == 18))
         {
             buttonString[2] = "Fortify Thy Bodily Defences";
         }
 
          //melee stat
-        if(randomIDs[0] == 6)
+        if((randomIDs[0] == 6) || (randomIDs[0] == 19))
         {
             buttonString[0] = "Sharpen Thy Thrusting Blade";
         }
-        if(randomIDs[1] == 6)
+        if((randomIDs[0] == 6) || (randomIDs[0] == 19))
         {
             buttonString[1] = "Sharpen Thy Thrusting Blade";
         }
-        if(randomIDs[2] == 6)
+        if((randomIDs[0] == 6) || (randomIDs[0] == 19))
         {
             buttonString[2] = "Sharpen Thy Thrusting Blade";
         }
@@ -275,29 +275,29 @@ public class UImanager : MonoBehaviour
         }
 
         //choice level
-        if(randomIDs[0] == 11)
+        if((randomIDs[0] >= 12) && (randomIDs[0] <= 15))
         {
             buttonString[0] = "Enhance Thy Conjured Items";
         }
-        if(randomIDs[1] == 11)
+        if((randomIDs[0] >= 12) && (randomIDs[0] <= 15))
         {
             buttonString[1] = "Enhance Thy Conjured Items";
         }
-        if(randomIDs[2] == 11)
+        if((randomIDs[0] >= 12) && (randomIDs[0] <= 15))
         {
             buttonString[2] = "Enhance Thy Conjured Items";
         }
 
         //move speed
-        if(randomIDs[0] == 12)
+        if(randomIDs[0] == 11)
         {
             buttonString[0] = "Hasten Thy Movement";
         }
-        if(randomIDs[1] == 12)
+        if(randomIDs[1] == 11)
         {
             buttonString[1] = "Hasten Thy Movement";
         }
-        if(randomIDs[2] == 12)
+        if(randomIDs[2] == 11)
         {
             buttonString[2] = "Hasten Thy Movement";
         }
@@ -323,22 +323,22 @@ public class UImanager : MonoBehaviour
         {
             pl.GetComponent<plHealth>().magicParryLevel +=1;
         }
-        if(upgradeID == 3) //health upgrade, full heal
+        if((upgradeID == 3) || (upgradeID == 16)) //health upgrade, full heal
         {
             pl.GetComponent<plHealth>().maxHealth += (20f * GameM.GetComponent<GameManager>().difficultyScaling);
             pl.GetComponent<plHealth>().health = pl.GetComponent<plHealth>().maxHealth;
             pl.GetComponent<plHealth>().healthSlider.maxValue = pl.GetComponent<plHealth>().health;
 
         }
-        if(upgradeID == 4) //attack speed
+        if((upgradeID == 4) || (upgradeID == 17)) //attack speed
         {
             pl.GetComponent<MeleeAttack>().attackSpeedStat *= 0.85f;
         }
-        if(upgradeID == 5) //defense upgrade
+        if((upgradeID == 5) || (upgradeID == 18)) //defense upgrade
         {
             pl.GetComponent<plHealth>().defenceStat += (1.5f * GameM.GetComponent<GameManager>().difficultyScaling);
         }
-        if(upgradeID == 6) //melee damage
+        if((upgradeID == 6) || (upgradeID == 19)) //melee damage
         {
             pl.GetComponent<MeleeAttack>().damageStat += (5f * GameM.GetComponent<GameManager>().difficultyScaling);
         }
@@ -358,14 +358,14 @@ public class UImanager : MonoBehaviour
         {
             pl.GetComponent<OffhandFunctions>().abilityID = 3;  
         }
-        if(upgradeID == 11) //choice slot upgrade
+        if(upgradeID == 11) //speed upgrade
+        {
+            pl.GetComponent<PlayerController>().baseSpeed += 1f;
+            pl.GetComponent<PlayerController>().sprintSpeed += 1.5f;
+        }
+        if((upgradeID >= 12) && (upgradeID <= 15)) //choice level
         {
             pl.GetComponent<OffhandFunctions>().choiceLevel +=1;
-        }
-        if(upgradeID == 12) //move speed
-        {
-            pl.GetComponent<PlayerController>().baseSpeed +=1;
-            pl.GetComponent<PlayerController>().sprintSpeed +=2;
         }
 
 

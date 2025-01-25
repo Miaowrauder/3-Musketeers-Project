@@ -16,6 +16,9 @@ TagManager:
   - SpawnSpot
   - PlayerSpawn
   - Breakable
+  - Environment
+  - Environment2
+  - Destroyable
   layers:
   - Default
   - TransparentFX

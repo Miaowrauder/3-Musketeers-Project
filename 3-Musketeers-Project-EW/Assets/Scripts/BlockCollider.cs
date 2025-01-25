@@ -30,6 +30,7 @@ public class BlockCollider : MonoBehaviour
         isDestroying = true;
         player.GetComponent<plHealth>().isRangedParrying = false;
         yield return new WaitForSeconds(lifespan);
+        Destroy(player.GetComponent<plHealth>().ranIcon);
         Destroy(self);
     }
 

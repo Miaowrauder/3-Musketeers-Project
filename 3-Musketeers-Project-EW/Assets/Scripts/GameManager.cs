@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public TMP_Text infoText;
 
-    public int lightID, mediumID, heavyID;
+    public int lightID, mediumID, heavyID, themeID;
 
     public float difficultyScaling, waveCount, enemyCount;
 
@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         endCanvas.enabled = false;
         inGameCanvas.enabled = true;
+        themeID = (Random.Range(0,3));
 
         if(!isTesting)
         {
@@ -136,7 +137,11 @@ public class GameManager : MonoBehaviour
         }
 
         waveCount -= 1;
+
+        if(waveCount < 1f)
+        {
         canEnd = true;
+        }
         intiateSpawn = false;
     }
 

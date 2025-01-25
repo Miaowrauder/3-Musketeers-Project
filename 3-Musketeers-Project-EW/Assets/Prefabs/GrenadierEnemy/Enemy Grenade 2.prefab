@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fuseDelay: 3
   self: {fileID: 1305427439286086946}
-  boomPrefab: {fileID: 2309893758193197899, guid: ae4d2c3568816ce4baa0298e7c40970e,
+  boomPrefab: {fileID: 2309893758193197899, guid: b8ef1f71d1a15454ab4af2e13af90dd7,
     type: 3}
   shellPrefab: {fileID: 6292791887878437478, guid: df3f5b144330a004a82c741694baeb2f,
     type: 3}

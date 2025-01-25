@@ -32,11 +32,16 @@ public class plHealth : MonoBehaviour
     public float health;
     public float maxHealth;
     public float defenceStat;
-
+    
+    [Header("Misc")]
     public Slider healthSlider;
 
     public bool canCountdown;
     public GameObject head, manager;
+    public GameObject[] parryIcon;
+    public Transform iconPos;
+
+    public GameObject melIcon, ranIcon, magIcon; //dont assign
 
     void Start()
     {
@@ -60,19 +65,25 @@ public class plHealth : MonoBehaviour
             isMeleeParrying = true;
             meleeIframes = (0.3f);
             meleeParryCd = 2f;
+            melIcon = Instantiate(parryIcon[0], iconPos.transform.position, Quaternion.identity);
+            melIcon.transform.parent = iconPos;
         }
 
-        if (Input.GetKeyDown(KeyCode.C) && magicParryEnabled && (magicParryLevel > 0) && !isMagicParrying && (magicParryCd <= 0) && (magicIframes == 0))
+        if (Input.GetKeyDown(KeyCode.E) && magicParryEnabled && (magicParryLevel > 0) && !isMagicParrying && (magicParryCd <= 0) && (magicIframes == 0))
         {
             isMagicParrying = true;
             magicIframes = (0.3f);
             magicParryCd = 2f;
+            magIcon = Instantiate(parryIcon[2], iconPos.transform.position, Quaternion.identity);
+            magIcon.transform.parent = iconPos;
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && rangedParryEnabled && (rangedParryLevel > 0) && !isRangedParrying && (rangedParryCd <= 0))
         {
             isRangedParrying = true;
             rangedParryCd = 6f;
+            ranIcon = Instantiate(parryIcon[1], iconPos.transform.position, Quaternion.identity);
+            ranIcon.transform.parent = iconPos;
 
             barrier = Instantiate(deflectPrefab, deflectPosition.transform.position, deflectPosition.transform.rotation);
             barrier.transform.parent = head.transform;
@@ -112,6 +123,7 @@ public class plHealth : MonoBehaviour
         {
             incomingMeleeDmg = 0f;
             isMeleeable = true;
+            Destroy(melIcon);
 
             if(isMeleeParrying)
             {
@@ -127,6 +139,7 @@ public class plHealth : MonoBehaviour
         {
             incomingMagicDmg = 0f;
             isMagicable = true;
+            Destroy(magIcon);
 
             if(isMagicParrying)
             {

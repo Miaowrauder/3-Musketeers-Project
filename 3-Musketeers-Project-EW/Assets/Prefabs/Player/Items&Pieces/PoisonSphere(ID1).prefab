@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DotID: 1
   statusDuration: 10
-  TickDps: 2.5
+  TickDps: 5
   lifespan: 5
   scale: 0
   self: {fileID: 8149298571704298433}

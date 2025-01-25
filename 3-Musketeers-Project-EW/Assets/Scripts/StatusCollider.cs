@@ -7,12 +7,28 @@ public class StatusCollider : MonoBehaviour
     public int DotID;
     public float statusDuration, TickDps, lifespan, scale;
     public GameObject self;
-    public bool isDestroying;
+    public bool isDestroying, isEnemy;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject gm = GameObject.Find("GameManager_DND");
+        GameObject pl = GameObject.FindWithTag("Player");
+        if(!isEnemy)
+        {
+        if(pl.GetComponent<OffhandFunctions>().choiceLevel > 0)
+        {
+        TickDps *= (pl.GetComponent<OffhandFunctions>().choiceLevel);
+        }
+        if(pl.GetComponent<OffhandFunctions>().choiceLevel > 1)
+        {
+        scale *= (pl.GetComponent<OffhandFunctions>().choiceLevel - 0.5f);
+        }
+        }
+        else if(isEnemy)
+        {
+            TickDps *= (gm.GetComponent<GameManager>().difficultyScaling);
+        }
     }
 
     // Update is called once per frame

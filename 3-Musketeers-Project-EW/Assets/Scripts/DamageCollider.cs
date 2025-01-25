@@ -81,6 +81,12 @@ public class DamageCollider : MonoBehaviour
             coll.transform.GetComponent<Breakable>().incomingDmg = (meleeDmg + rangedDmg+ magicDmg);
             coll.transform.GetComponent<Breakable>().iFrames = (lifespan+0.01f);
         }
+
+        if ((coll.tag == "Destroyable") && canBreak)
+        {
+            coll.transform.GetComponent<Destroyable>().incomingDmg = (meleeDmg + rangedDmg+ magicDmg);
+            coll.transform.GetComponent<Destroyable>().iFrames = (lifespan+0.01f);
+        }
         }
         else if(isEnemy && (coll.tag == "Player"))
         {

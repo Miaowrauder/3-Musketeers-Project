@@ -556,9 +556,19 @@ MonoBehaviour:
   - {fileID: 1907445860870785598, guid: b7625ff0bba56ca44be05fcb201dfe74, type: 3}
   - {fileID: 2076678267549043022, guid: 88559adc1ba4c2843b452d151f9fa9d7, type: 3}
   featurePrefab:
-  - {fileID: 5088216166180321128, guid: 0a0c6a446480751479e84c755c8fe792, type: 3}
   - {fileID: 3785765834941181170, guid: 086aad65747732c459a10a05527bbd37, type: 3}
   - {fileID: 7341867905851111065, guid: c0f27389da1c8cb499b1521ea5b4d911, type: 3}
+  - {fileID: 5088216166180321128, guid: 0a0c6a446480751479e84c755c8fe792, type: 3}
+  environment1: []
+  environment2: []
+  materials1:
+  - {fileID: 2100000, guid: 6ba8c0b7b8f6af54b8dd7117edb0b14f, type: 2}
+  - {fileID: 2100000, guid: a81e3af726ebc2448bd436b119eaa544, type: 2}
+  - {fileID: 2100000, guid: d67e4f7d124417541891aba834b5b179, type: 2}
+  materials2:
+  - {fileID: 2100000, guid: 0280f0b70171ce741ad357d87a2562d6, type: 2}
+  - {fileID: 2100000, guid: b1b3464fa40cc904cb7d49a5b0529e07, type: 2}
+  - {fileID: 2100000, guid: 54e3463e99256b647aa0ddc8f2aeb668, type: 2}
 --- !u!1 &822681744
 GameObject:
   m_ObjectHideFlags: 0
