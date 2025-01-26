@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9030475149502287429}
   - component: {fileID: 8310380324447546996}
   - component: {fileID: 1992686165590123797}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Pickup - Regen
   m_TagString: ConsumablePickup
   m_Icon: {fileID: 0}

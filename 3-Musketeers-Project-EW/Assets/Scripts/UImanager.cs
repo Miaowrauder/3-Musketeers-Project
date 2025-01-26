@@ -325,22 +325,22 @@ public class UImanager : MonoBehaviour
         }
         if((upgradeID == 3) || (upgradeID == 16)) //health upgrade, full heal
         {
-            pl.GetComponent<plHealth>().maxHealth += (20f * GameM.GetComponent<GameManager>().difficultyScaling);
+            pl.GetComponent<plHealth>().maxHealth += (30f * GameM.GetComponent<GameManager>().difficultyScaling);
             pl.GetComponent<plHealth>().health = pl.GetComponent<plHealth>().maxHealth;
             pl.GetComponent<plHealth>().healthSlider.maxValue = pl.GetComponent<plHealth>().health;
 
         }
         if((upgradeID == 4) || (upgradeID == 17)) //attack speed
         {
-            pl.GetComponent<MeleeAttack>().attackSpeedStat *= 0.85f;
+            pl.GetComponent<MeleeAttack>().attackSpeedStat *= 0.8f;
         }
         if((upgradeID == 5) || (upgradeID == 18)) //defense upgrade
         {
-            pl.GetComponent<plHealth>().defenceStat += (1.5f * GameM.GetComponent<GameManager>().difficultyScaling);
+            pl.GetComponent<plHealth>().defenceStat += (3f * GameM.GetComponent<GameManager>().difficultyScaling);
         }
         if((upgradeID == 6) || (upgradeID == 19)) //melee damage
         {
-            pl.GetComponent<MeleeAttack>().damageStat += (5f * GameM.GetComponent<GameManager>().difficultyScaling);
+            pl.GetComponent<MeleeAttack>().damageStat += (10f * GameM.GetComponent<GameManager>().difficultyScaling);
         }
         if(upgradeID == 7) //burn pouch
         {
@@ -360,8 +360,8 @@ public class UImanager : MonoBehaviour
         }
         if(upgradeID == 11) //speed upgrade
         {
-            pl.GetComponent<PlayerController>().baseSpeed += 1f;
-            pl.GetComponent<PlayerController>().sprintSpeed += 1.5f;
+            pl.GetComponent<PlayerController>().baseSpeed += 2f;
+            pl.GetComponent<PlayerController>().sprintSpeed += 3;
         }
         if((upgradeID >= 12) && (upgradeID <= 15)) //choice level
         {

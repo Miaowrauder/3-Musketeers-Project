@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1086582932145876078}
   - component: {fileID: 3530746665583180749}
   m_Layer: 0
-  m_Name: Enemy Grenade 2
+  m_Name: Berry Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.690108, y: -0.896, z: 2.110886}
-  m_LocalScale: {x: 0.32503295, y: 0.32503295, z: 0.32503295}
+  m_LocalScale: {x: 0.18713446, y: 0.18713446, z: 0.18713446}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -103,15 +103,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07c4961d11d218498472f5f254fc8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuseDelay: 3
+  fuseDelay: 2
   self: {fileID: 1305427439286086946}
-  boomPrefab: {fileID: 2309893758193197899, guid: b8ef1f71d1a15454ab4af2e13af90dd7,
+  boomPrefab: {fileID: 2309893758193197899, guid: 7e00f1582e5b7354dafa42eec0cfd096,
     type: 3}
-  shellPrefab: {fileID: 6292791887878437478, guid: df3f5b144330a004a82c741694baeb2f,
+  shellPrefab: {fileID: 2937265107701838877, guid: 6bb80f3c5e3444d4bb12e4a46f8907fc,
     type: 3}
   isPrimed: 0
   isEnemy: 1
   hasBeenDeflected: 0
   isMagic: 0
   isStatus: 1
-  AOEscale: 5
+  AOEscale: 7

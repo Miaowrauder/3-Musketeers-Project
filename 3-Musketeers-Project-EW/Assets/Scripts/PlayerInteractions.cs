@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PlayerInteractions : MonoBehaviour
 {
-    public GameObject hand, cam, player;
+    public GameObject hand, cam, player, target;
     public float lookDistance;
     public LayerMask layerMask;
+    public LayerMask layerMaskInf;
     public float castRadius;
+
+    public bool castTime;
 
     RaycastHit hit;
 
@@ -23,6 +26,12 @@ public class PlayerInteractions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(castTime)
+        {
+            InfiniteRaycast();
+            castTime = false;
+        }
 
         if (Physics.SphereCast(cam.transform.position, castRadius, cam.transform.forward, out hit, lookDistance, layerMask)) //add childcount
         {
@@ -58,6 +67,22 @@ public class PlayerInteractions : MonoBehaviour
                 }
                 
             }
+            if((hand.transform.childCount == 0) && (hit.collider.gameObject.CompareTag("Interactable")));
+            {
+                if(hit.collider.gameObject.CompareTag("Interactable")) //this seems redundant, but if I remove it again everything breaks
+                {
+                gmSc.infoText.text = "Depress thine F key to operate!";
+                }
+
+                if((hit.collider.gameObject.CompareTag("Interactable")) && (Input.GetKeyDown(KeyCode.F)))
+                {
+                    gmSc.infoText.text = "";
+
+                    hit.collider.GetComponent<InteractableObject>().isActivated = true;
+                    
+                }
+
+            }
             
         }
         else
@@ -77,6 +102,18 @@ public class PlayerInteractions : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3f);
         player.GetComponent<OffhandFunctions>().hasSalve = true;
+    }
+
+    void InfiniteRaycast()
+    {
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 999f, layerMaskInf))
+        {
+            if((hit.collider.gameObject.CompareTag("Enemy")))
+                {
+                    target = hit.collider.gameObject;
+                }
+                
+        }
     }
 }
 

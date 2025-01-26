@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2356701861317415188}
   - component: {fileID: 2776117657198990688}
   - component: {fileID: 8738873670988223040}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Pickup - Cleanse
   m_TagString: ConsumablePickup
   m_Icon: {fileID: 0}

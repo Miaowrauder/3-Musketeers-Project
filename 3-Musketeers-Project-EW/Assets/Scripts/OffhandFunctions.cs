@@ -9,13 +9,14 @@ public class OffhandFunctions : MonoBehaviour
     public GameObject[] abilityItems;
 
     public GameObject previewGrenade, item; //current held item, dont change in editor
-    public bool offhandEnabled, hasGrenade, hasSalve, hasMusket, isScaling, isConsuming;
+    public bool offhandEnabled, hasGrenade, hasSalve, hasMusket, isScaling, isConsuming, shoot;
     
     public int abilityID, choiceLevel;
 
     public GameObject cooldownManager;
 
     public float baseThrowForce, throwForce;
+    
     void Start()
     {
         offhandEnabled = true;
@@ -31,7 +32,6 @@ public class OffhandFunctions : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T) && (cooldownManager.GetComponent<cooldownManager>().choiceCD == 0) && (hand.transform.childCount == 0))
         {   
             //summons item corresponding to choice ability id in hand
-            cooldownManager.GetComponent<cooldownManager>().choiceCD = (16 - (2*choiceLevel));
             item = Instantiate(abilityItems[abilityID], hand.transform.position, Quaternion.identity);
             item.transform.parent = hand.transform;
             item.transform.position = hand.transform.position;
@@ -41,16 +41,19 @@ public class OffhandFunctions : MonoBehaviour
             if((abilityID >= 0) && (abilityID <= 1))
             {
                 hasGrenade = true;
-            }
-
-            if((abilityID == 999))
-            {
-                hasMusket = true;
+                cooldownManager.GetComponent<cooldownManager>().choiceCD = (16 - (2*choiceLevel));
             }
 
             if((abilityID >= 2) && (abilityID <= 3))
             {
                 hasSalve = true;
+                cooldownManager.GetComponent<cooldownManager>().choiceCD = (20 - (3*choiceLevel));
+            }
+
+            if((abilityID >= 4) && (abilityID <= 5))
+            {
+                hasMusket = true;
+                cooldownManager.GetComponent<cooldownManager>().choiceCD = (12 - (2*choiceLevel));
             }
 
         }
@@ -72,7 +75,7 @@ public class OffhandFunctions : MonoBehaviour
         {       
             if(hasMusket)
             {
-
+                shoot = true;
             }
 
             if(hasSalve)

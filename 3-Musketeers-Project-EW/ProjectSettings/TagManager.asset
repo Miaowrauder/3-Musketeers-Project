@@ -19,6 +19,7 @@ TagManager:
   - Environment
   - Environment2
   - Destroyable
+  - Interactable
   layers:
   - Default
   - TransparentFX

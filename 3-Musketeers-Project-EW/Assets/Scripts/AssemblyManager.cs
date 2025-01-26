@@ -5,7 +5,7 @@ using UnityEngine;
 public class AssemblyManager : MonoBehaviour
 {
     public Transform leftPos, rightPos, featurePos;
-    public GameObject[] halfPrefab, featurePrefab, environment1, environment2;
+    public GameObject[] halfPrefab, featurePrefab0, featurePrefab1, featurePrefab2, environment1, environment2;
 
     public Material[] materials1, materials2;
 
@@ -37,7 +37,19 @@ public class AssemblyManager : MonoBehaviour
 
         manager = GameObject.Find("GameManager_DND");
         manager.GetComponent<GameManager>().enterScene = true;
-        feature = Instantiate(featurePrefab[(manager.GetComponent<GameManager>().themeID)], featurePos.transform.position, featurePos.transform.rotation);
+
+        if(manager.GetComponent<GameManager>().themeID == 0)
+        {
+        feature = Instantiate(featurePrefab0[(Random.Range(0,featurePrefab0.Length))], featurePos.transform.position, featurePos.transform.rotation);
+        }
+        else if(manager.GetComponent<GameManager>().themeID == 0)
+        {
+        feature = Instantiate(featurePrefab1[(Random.Range(0,featurePrefab1.Length))], featurePos.transform.position, featurePos.transform.rotation);
+        }
+        else if(manager.GetComponent<GameManager>().themeID == 0)
+        {
+        feature = Instantiate(featurePrefab2[(Random.Range(0,featurePrefab2.Length))], featurePos.transform.position, featurePos.transform.rotation);
+        }
 
 
         for (int i = 0; i < environment1.Length; i++)
