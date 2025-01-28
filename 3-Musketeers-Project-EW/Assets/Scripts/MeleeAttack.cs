@@ -52,6 +52,8 @@ public class MeleeAttack : MonoBehaviour
         hitbox.GetComponent<DamageCollider>().scale = (hitboxScale);
         hitbox.GetComponent<DamageCollider>().canBreak = true;
 
+        this.GetComponent<PlayerInteractions>().castTime = true;
+
         yield return new WaitForSeconds(attackSpeedStat * 0.2f);
 
         swordArm.transform.position = (pullPos[2].transform.position);

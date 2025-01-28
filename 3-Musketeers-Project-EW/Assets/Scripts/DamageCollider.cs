@@ -95,15 +95,35 @@ public class DamageCollider : MonoBehaviour
             coll.transform.GetComponent<plHealth>().incomingRangedDmg = (rangedDmg);
             coll.transform.GetComponent<plHealth>().rangedIframes = (lifespan+0.01f);
             }
-            if(((coll.transform.GetComponent<plHealth>().meleeIframes) == 0) && (meleeDmg > 0))
+
+            if(rangedDmg > 0)
             {
-            coll.transform.GetComponent<plHealth>().incomingMeleeDmg = (meleeDmg);
-            coll.transform.GetComponent<plHealth>().meleeIframes = (lifespan+0.01f);
+                coll.transform.GetComponent<plHealth>().incomingRangedDmg = (rangedDmg);
+
+                if(coll.transform.GetComponent<plHealth>().rangedIframes== 0)
+                {
+                    coll.transform.GetComponent<plHealth>().rangedIframes = (lifespan+0.01f);
+                }
             }
-            if(((coll.transform.GetComponent<plHealth>().magicIframes) == 0) && (magicDmg > 0))
+        
+            if(meleeDmg > 0)
             {
-            coll.transform.GetComponent<plHealth>().incomingMagicDmg = (magicDmg);
-            coll.transform.GetComponent<plHealth>().magicIframes = (lifespan+0.01f);
+                coll.transform.GetComponent<plHealth>().incomingMeleeDmg = (meleeDmg);
+
+                if(coll.transform.GetComponent<plHealth>().meleeIframes== 0)
+                {
+                    coll.transform.GetComponent<plHealth>().meleeIframes = (lifespan+0.01f);
+                }
+            }
+
+            if(magicDmg > 0)
+            {
+                coll.transform.GetComponent<plHealth>().incomingMagicDmg = (magicDmg);
+
+                if(coll.transform.GetComponent<plHealth>().magicIframes== 0)
+                {
+                    coll.transform.GetComponent<plHealth>().magicIframes = (lifespan+0.01f);
+                }
             }
         }
     }

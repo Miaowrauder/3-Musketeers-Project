@@ -43,7 +43,6 @@ public class Musket : MonoBehaviour
         }
         if(musketID == 1)
         {
-        pl.GetComponent<PlayerInteractions>().castTime = true;
         GameObject proj = Instantiate(bullet, shootPos.transform.position, shootPos.transform.rotation);
         proj.GetComponent<Projectile>().magicDmg = (30 * (pl.GetComponent<OffhandFunctions>().choiceLevel + 1));
         proj.GetComponent<Projectile>().isHoming = true;

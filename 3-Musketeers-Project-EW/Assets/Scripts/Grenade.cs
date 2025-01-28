@@ -47,9 +47,9 @@ public class Grenade : MonoBehaviour
         if(hasBeenDeflected)
         {
             boom.GetComponent<DamageCollider>().isEnemy = false;
-            boom.GetComponent<DamageCollider>().rangedDmg *=2f;
-            boom.GetComponent<DamageCollider>().meleeDmg *=2f;
-            boom.GetComponent<DamageCollider>().magicDmg *=2f;
+            boom.GetComponent<DamageCollider>().rangedDmg *=3f;
+            boom.GetComponent<DamageCollider>().meleeDmg *=3f;
+            boom.GetComponent<DamageCollider>().magicDmg *=3f;
         }
 
         Destroy(self);

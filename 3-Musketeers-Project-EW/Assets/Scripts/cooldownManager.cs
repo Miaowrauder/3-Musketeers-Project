@@ -6,7 +6,7 @@ using TMPro;
 public class cooldownManager : MonoBehaviour
 {
 
-    public float choiceCD;
+    public float choiceCD, magicParryCd, meleeParryCd, rangedParryCd;
     bool isTicking;
 
     public TMP_Text[] cdText;
@@ -28,6 +28,22 @@ public class cooldownManager : MonoBehaviour
         {
             choiceCD = 0f;
         }
+        if(rangedParryCd < 0)
+        {
+            rangedParryCd = 0f;
+        }
+        if(magicParryCd < 0)
+        {
+            magicParryCd = 0f;
+        }
+        if(meleeParryCd < 0)
+        {
+            meleeParryCd = 0f;
+        }
+
+
+
+
 
     }
 
@@ -39,6 +55,21 @@ public class cooldownManager : MonoBehaviour
         {
             choiceCD -= 0.1f;
             cdText[0].text = " " + choiceCD + " ";
+        }
+        if(rangedParryCd > 0)
+        {
+            rangedParryCd -= 0.1f;
+            cdText[1].text = " " + rangedParryCd + " ";
+        }
+        if(meleeParryCd > 0)
+        {
+            meleeParryCd -= 0.1f;
+            cdText[2].text = " " + meleeParryCd + " ";
+        }
+        if(magicParryCd> 0)
+        {
+            magicParryCd -= 0.1f;
+            cdText[3].text = " " + magicParryCd + " ";
         }
         isTicking = false;
 

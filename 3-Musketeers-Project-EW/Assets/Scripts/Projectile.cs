@@ -12,6 +12,8 @@ public class Projectile : MonoBehaviour
     public float rangedDmg, magicDmg;
     public GameObject self, pl;
 
+    int o = 1;
+
     public float appliedIframes;
     // Start is called before the first frame update
     void Start()
@@ -35,7 +37,12 @@ public class Projectile : MonoBehaviour
 
         if(isHoming)
         {
+            if((pl.GetComponent<PlayerInteractions>().target) != null)
+            {
+                this.transform.parent = null;
+            }
             this.transform.position = Vector3.Lerp(this.transform.position, (pl.GetComponent<PlayerInteractions>().target).transform.position, moveSpeed * Time.deltaTime);
+            //this.transform.LookAt((pl.GetComponent<PlayerInteractions>().target).transform.position);
         }
     }
 
@@ -55,19 +62,23 @@ public class Projectile : MonoBehaviour
         {
             if(rangedDmg > 0)
             {
-            if((coll.transform.GetComponent<plHealth>().rangedIframes) == 0)
-            {
-            coll.transform.GetComponent<plHealth>().incomingRangedDmg = (rangedDmg);
-            coll.transform.GetComponent<plHealth>().rangedIframes = (appliedIframes);
+                coll.transform.GetComponent<plHealth>().incomingRangedDmg = (rangedDmg);
+
+                    if((coll.transform.GetComponent<plHealth>().rangedIframes) == 0)
+                    {
+                    coll.transform.GetComponent<plHealth>().rangedIframes = (appliedIframes);
+                    }
+
             }
-            }
+
             if(magicDmg > 0)
             {
-            if((coll.transform.GetComponent<plHealth>().magicIframes) == 0)
-            {
-            coll.transform.GetComponent<plHealth>().incomingMagicDmg = (magicDmg);
-            coll.transform.GetComponent<plHealth>().magicIframes = (appliedIframes);
-            }
+                coll.transform.GetComponent<plHealth>().incomingMagicDmg = (magicDmg);
+
+                    if((coll.transform.GetComponent<plHealth>().magicIframes) == 0)
+                    {    
+                    coll.transform.GetComponent<plHealth>().magicIframes = (appliedIframes);
+                    }
             }
 
             Destroy(self);
@@ -85,8 +96,8 @@ public class Projectile : MonoBehaviour
                 self.transform.LookAt(coll.GetComponent<BlockCollider>().deflectionDirection.transform.position);
                 rb.velocity = Vector3.zero;
                 rb.AddForce(transform.forward * (moveSpeed*2), ForceMode.Impulse);
-                rangedDmg *= 2f;
-                magicDmg *= 2f;
+                rangedDmg *= 3f;
+                magicDmg *= 3f;
             }
         }
         }

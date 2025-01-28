@@ -7,14 +7,15 @@ public class plHealth : MonoBehaviour
 {
     [Header("Incoming Melee")]
     public bool isMeleeable, isMeleeParrying, meleeParryEnabled;
-    public float incomingMeleeDmg, meleeParryCd;
+    public float incomingMeleeDmg;
     public int meleeParryLevel; // used as both unlock condition >1 and upgrade condition >2
     public float meleeIframes;
+    public GameObject slashPrefab;
     
 
     [Header("Incoming Ranged")]
     public bool isRangedable, isRangedParrying, rangedParryEnabled;
-    public float incomingRangedDmg, rangedParryCd, deflectDuration;
+    public float incomingRangedDmg, deflectDuration;
     public int rangedParryLevel;
     public float rangedIframes;
     public GameObject deflectPrefab;
@@ -25,8 +26,9 @@ public class plHealth : MonoBehaviour
     [Header("Incoming Magic")]
     public bool isMagicable, isMagicParrying, magicParryEnabled;
     public int magicParryLevel;
-    public float incomingMagicDmg, magicParryCd;
+    public float incomingMagicDmg;
     public float magicIframes;
+    public GameObject magicProjectile;
 
     [Header("Misc Stats")]
     public float health;
@@ -60,28 +62,28 @@ public class plHealth : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && meleeParryEnabled && (meleeParryLevel > 0) && !isMeleeParrying && (meleeParryCd <= 0) && (meleeIframes == 0))
+        if (Input.GetKeyDown(KeyCode.Mouse1) && meleeParryEnabled && (meleeParryLevel > 0) && !isMeleeParrying && (this.GetComponent<cooldownManager>().meleeParryCd <= 0) && (meleeIframes == 0))
         {
             isMeleeParrying = true;
             meleeIframes = (0.3f);
-            meleeParryCd = 2f;
+            this.GetComponent<cooldownManager>().meleeParryCd = 2f;
             melIcon = Instantiate(parryIcon[0], iconPos.transform.position, Quaternion.identity);
             melIcon.transform.parent = iconPos;
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && magicParryEnabled && (magicParryLevel > 0) && !isMagicParrying && (magicParryCd <= 0) && (magicIframes == 0))
+        if (Input.GetKeyDown(KeyCode.E) && magicParryEnabled && (magicParryLevel > 0) && !isMagicParrying && (this.GetComponent<cooldownManager>().magicParryCd <= 0) && (magicIframes == 0))
         {
             isMagicParrying = true;
             magicIframes = (0.3f);
-            magicParryCd = 2f;
+            this.GetComponent<cooldownManager>().magicParryCd = 2f;
             magIcon = Instantiate(parryIcon[2], iconPos.transform.position, Quaternion.identity);
             magIcon.transform.parent = iconPos;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && rangedParryEnabled && (rangedParryLevel > 0) && !isRangedParrying && (rangedParryCd <= 0))
+        if (Input.GetKeyDown(KeyCode.Q) && rangedParryEnabled && (rangedParryLevel > 0) && !isRangedParrying && (this.GetComponent<cooldownManager>().rangedParryCd <= 0))
         {
             isRangedParrying = true;
-            rangedParryCd = 6f;
+            this.GetComponent<cooldownManager>().rangedParryCd = 6f;
             ranIcon = Instantiate(parryIcon[1], iconPos.transform.position, Quaternion.identity);
             ranIcon.transform.parent = iconPos;
 
@@ -161,7 +163,7 @@ public class plHealth : MonoBehaviour
         }
 
         //counts down when any value is above 0
-        if ((meleeIframes>0)||(rangedIframes>0)||(magicIframes>0)||(meleeParryCd>0)||(rangedParryCd>0)||(magicParryCd>0)||(deflectDuration>0))
+        if ((meleeIframes>0)||(rangedIframes>0)||(magicIframes>0)||(this.GetComponent<cooldownManager>().meleeParryCd > 0)||(this.GetComponent<cooldownManager>().magicParryCd > 0)||(this.GetComponent<cooldownManager>().rangedParryCd > 0)||(deflectDuration>0))
         {
             if (canCountdown)
             {
@@ -188,14 +190,22 @@ public class plHealth : MonoBehaviour
         }
         else if (isMagicParrying)
         {
-            incomingMagicDmg = 0;
-            isMagicParrying = false;
-            magicParryCd = 6f;
-
             if(magicParryLevel > 1)
             {
+
+                GameObject magProj = Instantiate(magicProjectile, (this.GetComponent<MeleeAttack>().hitboxPos).transform.position, (this.GetComponent<MeleeAttack>().hitboxPos).transform.rotation);
+                magProj.GetComponent<Projectile>().magicDmg = (incomingMagicDmg*4);
+                magProj.GetComponent<Projectile>().isHoming = true;
+                magProj.GetComponent<Projectile>().moveSpeed = 2;
+                magProj.GetComponent<Projectile>().lifespan = 5f;
+                magProj.transform.parent = (this.GetComponent<MeleeAttack>().swordArm).transform;
                 //upgraded effect
             }
+
+            incomingMagicDmg = 0;
+            isMagicParrying = false;
+            this.GetComponent<cooldownManager>().magicParryCd = 6f;
+      
         }
     }
 
@@ -221,14 +231,19 @@ public class plHealth : MonoBehaviour
 
         if(isMeleeParrying)
         {
-            incomingMeleeDmg = 0;
-            isMeleeParrying = false;
-            meleeParryCd = 6f;
 
             if (meleeParryLevel > 1)
             {
-                //upgraded effect
+                GameObject slash = Instantiate(slashPrefab, this.transform.position, this.transform.rotation);
+                slash.GetComponent<DamageCollider>().meleeDmg = (incomingMeleeDmg * 2);
+                slash.GetComponent<DamageCollider>().lifespan = (0.2f);
+                slash.GetComponent<DamageCollider>().scale = (1.2f);
+                slash.GetComponent<DamageCollider>().canBreak = true;
             }
+
+            incomingMeleeDmg = 0;
+            isMeleeParrying = false;
+            this.GetComponent<cooldownManager>().meleeParryCd = 6f;
         }
     }
 
@@ -269,21 +284,6 @@ public class plHealth : MonoBehaviour
         if (magicIframes > 0)
         {
             magicIframes -= 0.05f;
-        }
-
-        if(magicParryCd > 0)
-        {
-            magicParryCd -= 0.05f;
-        }
-
-        if(meleeParryCd > 0)
-        {
-            meleeParryCd -= 0.05f;
-        }
-
-        if(rangedParryCd > 0)
-        {
-            rangedParryCd -= 0.05f;
         }
 
         canCountdown = true;
