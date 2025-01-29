@@ -119,10 +119,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   self: {fileID: 2309893758193197899}
+  pl: {fileID: 0}
   scale: 0
   meleeDmg: 0
   rangedDmg: 10
   magicDmg: 0
   lifespan: 0.2
   tempTEST: 0
+  iconID: 0
   canBreak: 0
+  isEnemy: 0
+  isIcon: 0
+  isGrenade: 1

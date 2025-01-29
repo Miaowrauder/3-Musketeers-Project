@@ -14,6 +14,8 @@ public class UImanager : MonoBehaviour
     public int sceneNumber, upgradeID;
     bool canText;
     public int[] randomIDs;
+
+    public bool[] hasTrinket;
     // Start is called before the first frame update
     void Start()
     {
@@ -361,7 +363,8 @@ public class UImanager : MonoBehaviour
         if(upgradeID == 11) //speed upgrade
         {
             pl.GetComponent<PlayerController>().baseSpeed += 2f;
-            pl.GetComponent<PlayerController>().sprintSpeed += 3;
+            pl.GetComponent<PlayerController>().sprintSpeed += 3f;
+            pl.GetComponent<PlayerController>().crouchSpeed += 1f;
         }
         if((upgradeID >= 12) && (upgradeID <= 15)) //choice level
         {

@@ -126,3 +126,4 @@ MonoBehaviour:
   self: {fileID: 2309893758193197899}
   isDestroying: 0
   isEnemy: 1
+  isGrenade: 1

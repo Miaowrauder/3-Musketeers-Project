@@ -16,7 +16,7 @@ public class DamageCollider : MonoBehaviour
 
     bool isDestroying;
 
-    public bool canBreak, isEnemy, isIcon;
+    public bool canBreak, isEnemy, isIcon, isGrenade;
     // Start is called before the first frame update
 
     void Awake()
@@ -31,9 +31,17 @@ public class DamageCollider : MonoBehaviour
         }
     }
     void Start()
-    {
-        
+    {       
+            GameObject ui = GameObject.FindWithTag("UImanager");
             pl = GameObject.FindWithTag("Player");
+
+            if(isGrenade && (ui.GetComponent<UImanager>().hasTrinket[2] == true) && !isEnemy)
+        {
+            meleeDmg *= 1.5f;
+            magicDmg *= 1.5f;
+            rangedDmg *= 1.5f;
+            scale *= 1.5f;
+        }
         
     }
 

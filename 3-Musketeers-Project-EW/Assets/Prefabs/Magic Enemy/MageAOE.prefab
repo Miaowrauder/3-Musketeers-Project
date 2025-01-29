@@ -130,3 +130,4 @@ MonoBehaviour:
   canBreak: 0
   isEnemy: 1
   isIcon: 0
+  isGrenade: 1

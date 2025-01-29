@@ -6,7 +6,7 @@ using TMPro;
 public class cooldownManager : MonoBehaviour
 {
 
-    public float choiceCD, magicParryCd, meleeParryCd, rangedParryCd;
+    public float choiceCD, magicParryCd, meleeParryCd, rangedParryCd, dodgeCd;
     bool isTicking;
 
     public TMP_Text[] cdText;
@@ -20,25 +20,29 @@ public class cooldownManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((choiceCD > 0) && !isTicking)
+        if(((choiceCD > 0) || (rangedParryCd > 0) || (meleeParryCd > 0) || (dodgeCd > 0 ) || (magicParryCd > 0)) && !isTicking)
         {
             StartCoroutine(TickDown());
         }
         if(choiceCD < 0)
         {
             choiceCD = 0f;
+            cdText[0].text = " _/ ";
         }
         if(rangedParryCd < 0)
         {
             rangedParryCd = 0f;
-        }
-        if(magicParryCd < 0)
-        {
-            magicParryCd = 0f;
+            cdText[1].text = " _/ ";
         }
         if(meleeParryCd < 0)
         {
             meleeParryCd = 0f;
+            cdText[2].text = " _/ ";
+        }
+        if(magicParryCd < 0)
+        {
+            magicParryCd = 0f;
+            cdText[3].text = " _/ ";
         }
 
 
@@ -66,10 +70,14 @@ public class cooldownManager : MonoBehaviour
             meleeParryCd -= 0.1f;
             cdText[2].text = " " + meleeParryCd + " ";
         }
-        if(magicParryCd> 0)
+        if(magicParryCd > 0)
         {
             magicParryCd -= 0.1f;
             cdText[3].text = " " + magicParryCd + " ";
+        }
+        if(dodgeCd > 0)
+        {
+            dodgeCd -= 0.1f;
         }
         isTicking = false;
 

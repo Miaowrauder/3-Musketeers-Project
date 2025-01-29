@@ -7,13 +7,14 @@ public class Destroyable : MonoBehaviour
     public float hp, maxHp;
     public float incomingDmg, iFrames;
     bool isDamageable, canCountdown;
-    public GameObject breakItem;
+    public GameObject breakItem, ui;
 
     public GameObject[] consumable;
     public Transform[] breakPos;
     // Start is called before the first frame update
     void Start()
     {
+        ui = GameObject.FindWithTag("UImanager");
         hp = maxHp;
         canCountdown = true;
     }
@@ -42,9 +43,13 @@ public class Destroyable : MonoBehaviour
 
             int i = (Random.Range(0,5));
 
+            if(ui.GetComponent<UImanager>().hasTrinket[0] == true)
+            {
+                i = (Random.Range(0,3));
+            }
+
             if(i == 0)
             {
-              
               GameObject pickup = Instantiate(consumable[(Random.Range(0,consumable.Length))], shard0.transform.position, Quaternion.identity);
             }
             Destroy(this.gameObject);
