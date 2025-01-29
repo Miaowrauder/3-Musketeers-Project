@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StatusManager : MonoBehaviour
 {
-    public GameObject self;
+    public GameObject self, ui;
     public float[] DotDmg, DotDuration;
     public bool isTicking, isEnemy;
     public bool[] getStatus;
@@ -16,6 +16,7 @@ public class StatusManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ui = GameObject.FindWithTag("UImanager");
         isTicking = false;
         DotDmg[0] = 0f;
         DotDmg[1] = 0f;
@@ -98,7 +99,14 @@ public class StatusManager : MonoBehaviour
             }
             else if (!isEnemy)
             {
-                self.GetComponent<plHealth>().health -= DotDmg[0];
+                if(ui.GetComponent<UImanager>().hasTrinket[7])
+                {
+                    self.GetComponent<plHealth>().health += DotDmg[0];
+                }
+                else if (ui.GetComponent<UImanager>().hasTrinket[7] == false)
+                {
+                    self.GetComponent<plHealth>().health -= DotDmg[0];
+                }
 
                 if (self.GetComponent<PlayerController>().isSprinting == true)
                 {
@@ -121,7 +129,14 @@ public class StatusManager : MonoBehaviour
             }
             else if (!isEnemy)
             {
-                self.GetComponent<plHealth>().health -= DotDmg[1];
+                if(ui.GetComponent<UImanager>().hasTrinket[8])
+                {
+                    self.GetComponent<plHealth>().health += DotDmg[1];
+                }
+                else if(ui.GetComponent<UImanager>().hasTrinket[8] == false)
+                {
+                    self.GetComponent<plHealth>().health -= DotDmg[1];
+                }
 
             }
         }

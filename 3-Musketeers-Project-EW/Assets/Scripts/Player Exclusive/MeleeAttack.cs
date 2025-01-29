@@ -17,12 +17,15 @@ public class MeleeAttack : MonoBehaviour
     [Header("PlayerStats")]
     public float damageStat;
     public float attackSpeedStat;
+    [Header("PlayerStats")]
+    public GameObject ui;
 
     
 
     // Start is called before the first frame update
     void Start()
     {
+        ui = GameObject.FindWithTag("UImanager");
         attackEnabled = true;
         mainhandEnabled = true;
     }
@@ -47,7 +50,22 @@ public class MeleeAttack : MonoBehaviour
         
         GameObject hitbox = Instantiate(hitboxPrefab, hitboxPos.transform.position, hitboxPos.transform.rotation);
         hitbox.transform.parent = swordArm.transform;
-        hitbox.GetComponent<DamageCollider>().meleeDmg = (damageStat + 15f);
+
+        if(ui.GetComponent<UImanager>().hasTrinket[4])
+        {
+            hitbox.GetComponent<DamageCollider>().meleeDmg = ((damageStat + 15f)*0.7f);
+            hitbox.GetComponent<DamageCollider>().magicDmg = ((damageStat + 15f)*0.3f);
+        }
+        else if(ui.GetComponent<UImanager>().hasTrinket[5])
+        {
+            hitbox.GetComponent<DamageCollider>().magicDmg = (damageStat + 15f);
+        }
+        else 
+        {
+            hitbox.GetComponent<DamageCollider>().meleeDmg = (damageStat + 15f);
+        }
+        
+        
         hitbox.GetComponent<DamageCollider>().lifespan = (attackSpeedStat * 0.2f);
         hitbox.GetComponent<DamageCollider>().scale = (hitboxScale);
         hitbox.GetComponent<DamageCollider>().canBreak = true;

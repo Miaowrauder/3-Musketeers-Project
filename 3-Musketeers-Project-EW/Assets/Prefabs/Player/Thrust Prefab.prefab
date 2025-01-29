@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7.3112, y: 1.9121573, z: 0.011671}
-  m_LocalScale: {x: 1.8834442, y: 1.3182, z: 2.1207201}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.3, y: 0.90985435, z: 1.4637737}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -588,3 +588,4 @@ MonoBehaviour:
   canBreak: 1
   isEnemy: 0
   isIcon: 0
+  isGrenade: 0

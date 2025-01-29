@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
 
     void NewScene()
     {
-        
 
         for (int j = 0; j < spawnSpots.Length; j++)
         {
@@ -67,6 +66,17 @@ public class GameManager : MonoBehaviour
 
         pl.GetComponent<PlayerController>().canMove = false;
         pl.transform.position = plSpawn[(Random.Range(0, plSpawn.Length))].transform.position;
+
+        if(UI.GetComponent<UImanager>().hasTrinket[6])
+        {
+            //letter of introduction
+            pl.GetComponent<plHealth>().hasLetterBuff = true;
+            pl.GetComponent<plHealth>().defenceStat *= 2;
+            pl.GetComponent<MeleeAttack>().damageStat *= 1.5f;
+            pl.GetComponent<PlayerController>().baseSpeed *= 1.5f;
+            pl.GetComponent<PlayerController>().sprintSpeed *= 1.5f;
+            pl.GetComponent<PlayerController>().crouchSpeed *= 1.5f;
+        }
 
 
         spawnSpots = (GameObject.FindGameObjectsWithTag("SpawnSpot"));
@@ -155,6 +165,17 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         UI.GetComponent<UImanager>().canLoad = true;
         UI.GetComponent<UImanager>().reroll = true;
+
+        //letter of introduction
+        if(UI.GetComponent<UImanager>().hasTrinket[6] && pl.GetComponent<plHealth>().hasLetterBuff)
+        {
+        pl.GetComponent<plHealth>().hasLetterBuff = false;
+        pl.GetComponent<plHealth>().defenceStat /= 2;
+        pl.GetComponent<MeleeAttack>().damageStat = ((pl.GetComponent<MeleeAttack>().damageStat / 3f) *2f );
+        pl.GetComponent<PlayerController>().baseSpeed = ((pl.GetComponent<PlayerController>().baseSpeed / 3f) *2f );
+        pl.GetComponent<PlayerController>().sprintSpeed = ((pl.GetComponent<PlayerController>().sprintSpeed / 3f) *2f );
+        pl.GetComponent<PlayerController>().crouchSpeed = ((pl.GetComponent<PlayerController>().crouchSpeed / 3f) *2f );
+        }
     }
 
 }

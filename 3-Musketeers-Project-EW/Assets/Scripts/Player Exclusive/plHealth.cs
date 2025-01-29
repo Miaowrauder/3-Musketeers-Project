@@ -38,8 +38,8 @@ public class plHealth : MonoBehaviour
     [Header("Misc")]
     public Slider healthSlider;
 
-    public bool canCountdown;
-    public GameObject head, manager;
+    public bool canCountdown, hasLetterBuff;
+    public GameObject head, manager, ui;
     public GameObject[] parryIcon;
     public Transform iconPos;
 
@@ -47,6 +47,7 @@ public class plHealth : MonoBehaviour
 
     void Start()
     {
+        ui = GameObject.FindWithTag("UImanager");
         health = maxHealth;
         healthSlider.maxValue = health;
 
@@ -61,7 +62,7 @@ public class plHealth : MonoBehaviour
 
     void Update()
     {
-
+        
         if (Input.GetKeyDown(KeyCode.Mouse1) && meleeParryEnabled && (meleeParryLevel > 0) && !isMeleeParrying && (this.GetComponent<cooldownManager>().meleeParryCd <= 0) && (meleeIframes == 0))
         {
             isMeleeParrying = true;
@@ -187,6 +188,18 @@ public class plHealth : MonoBehaviour
             health -= (incomingMagicDmg);
             incomingMagicDmg = 0;
             isMagicable = false;
+
+            if(hasLetterBuff)
+            {
+                hasLetterBuff = false;
+                defenceStat /= 2;
+                this.GetComponent<MeleeAttack>().damageStat = ((this.GetComponent<MeleeAttack>().damageStat / 3f) *2);
+                this.GetComponent<PlayerController>().baseSpeed = ((this.GetComponent<PlayerController>().baseSpeed / 3f) *2);
+                this.GetComponent<PlayerController>().sprintSpeed = ((this.GetComponent<PlayerController>().sprintSpeed / 3f) *2);
+                this.GetComponent<PlayerController>().crouchSpeed = ((this.GetComponent<PlayerController>().crouchSpeed / 3f) *2);
+            }
+        
+            
         }
         else if (isMagicParrying)
         {
@@ -213,6 +226,15 @@ public class plHealth : MonoBehaviour
     {
         if (!isMeleeParrying)
         {
+            if(hasLetterBuff)
+            {
+                hasLetterBuff = false;
+                defenceStat /= 2;
+                this.GetComponent<MeleeAttack>().damageStat = ((this.GetComponent<MeleeAttack>().damageStat / 3f) *2);
+                this.GetComponent<PlayerController>().baseSpeed = ((this.GetComponent<PlayerController>().baseSpeed / 3f) *2);
+                this.GetComponent<PlayerController>().sprintSpeed = ((this.GetComponent<PlayerController>().sprintSpeed / 3f) *2);
+                this.GetComponent<PlayerController>().crouchSpeed = ((this.GetComponent<PlayerController>().crouchSpeed / 3f) *2);
+            }
 
         if (incomingMeleeDmg <= 5f)
         {
@@ -249,6 +271,15 @@ public class plHealth : MonoBehaviour
 
      void TakeRangedDmg()
     {
+        if(hasLetterBuff)
+            {
+                hasLetterBuff = false;
+                defenceStat /= 2;
+                this.GetComponent<MeleeAttack>().damageStat = ((this.GetComponent<MeleeAttack>().damageStat / 3f) *2);
+                this.GetComponent<PlayerController>().baseSpeed = ((this.GetComponent<PlayerController>().baseSpeed / 3f) *2);
+                this.GetComponent<PlayerController>().sprintSpeed = ((this.GetComponent<PlayerController>().sprintSpeed / 3f) *2);
+                this.GetComponent<PlayerController>().crouchSpeed = ((this.GetComponent<PlayerController>().crouchSpeed / 3f) *2);
+            }
 
         if (incomingRangedDmg <= 5f)
         {
