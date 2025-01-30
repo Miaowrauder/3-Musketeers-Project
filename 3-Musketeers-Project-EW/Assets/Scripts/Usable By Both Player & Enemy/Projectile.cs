@@ -12,8 +12,6 @@ public class Projectile : MonoBehaviour
     public float rangedDmg, magicDmg;
     public GameObject self, pl;
 
-    int o = 1;
-
     public float appliedIframes;
     // Start is called before the first frame update
     void Start()

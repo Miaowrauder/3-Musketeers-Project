@@ -46,7 +46,7 @@ public class Musket : MonoBehaviour
         GameObject proj = Instantiate(bullet, shootPos.transform.position, shootPos.transform.rotation);
         proj.GetComponent<Projectile>().magicDmg = (30 * (pl.GetComponent<OffhandFunctions>().choiceLevel + 1));
         proj.GetComponent<Projectile>().isHoming = true;
-        proj.GetComponent<Projectile>().moveSpeed = (1 * (pl.GetComponent<OffhandFunctions>().choiceLevel + 1));
+        proj.GetComponent<Projectile>().moveSpeed = (2 * (pl.GetComponent<OffhandFunctions>().choiceLevel + 1));
         proj.GetComponent<Projectile>().lifespan = 5f;
         }
 
@@ -54,6 +54,7 @@ public class Musket : MonoBehaviour
 
         if(ammo == 0)
         {
+            pl.GetComponent<OffhandFunctions>().hasMusket = false;
             Destroy(this.gameObject);
         }
         }

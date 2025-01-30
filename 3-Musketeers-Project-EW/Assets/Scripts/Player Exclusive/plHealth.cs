@@ -257,7 +257,7 @@ public class plHealth : MonoBehaviour
             if (meleeParryLevel > 1)
             {
                 GameObject slash = Instantiate(slashPrefab, this.transform.position, this.transform.rotation);
-                slash.GetComponent<DamageCollider>().meleeDmg = (incomingMeleeDmg * 2);
+                slash.GetComponent<DamageCollider>().meleeDmg = (incomingMeleeDmg * 3);
                 slash.GetComponent<DamageCollider>().lifespan = (0.2f);
                 slash.GetComponent<DamageCollider>().scale = (1.2f);
                 slash.GetComponent<DamageCollider>().canBreak = true;

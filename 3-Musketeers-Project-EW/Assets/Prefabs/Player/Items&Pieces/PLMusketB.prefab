@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
-  isDestroying: 1
+  isDestroying: 0
   isHoming: 0
   lifespan: 0
   moveSpeed: 0

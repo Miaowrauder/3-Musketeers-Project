@@ -10,13 +10,13 @@ public class GameManager : MonoBehaviour
 {
     public TMP_Text infoText;
 
-    public int lightID, mediumID, heavyID, themeID;
+    public int lightID, mediumID, heavyID, themeID, bossID;
 
     public float difficultyScaling, waveCount, enemyCount;
 
     public bool intiateSpawn, enterScene, isTesting;
 
-    public GameObject[] enemySet, spawnSpots, plSpawn;
+    public GameObject[] enemySet, spawnSpots, plSpawn, bossPrefabs;
 
     public GameObject navmesh, pl, UI;
 
@@ -78,17 +78,21 @@ public class GameManager : MonoBehaviour
             pl.GetComponent<PlayerController>().crouchSpeed *= 1.5f;
         }
 
+        if(UI.GetComponent<UImanager>().sceneNumber %3 != 1)
+        {
+            spawnSpots = (GameObject.FindGameObjectsWithTag("SpawnSpot"));
+            waveCount = (1f + (difficultyScaling/2));
+            lightID = (Random.Range(0,4));
+            mediumID = (Random.Range(0,4));
+            heavyID = (Random.Range(0,4));
 
-        spawnSpots = (GameObject.FindGameObjectsWithTag("SpawnSpot"));
+            enemyCount = (4f + (difficultyScaling*2));
+        }
+        
 
         
 
-        waveCount = (1f + (difficultyScaling/2));
-        lightID = (Random.Range(0,4));
-        mediumID = (Random.Range(0,4));
-        heavyID = (Random.Range(0,4));
-
-        enemyCount = (5f + difficultyScaling);
+        
 
         endCanvas.enabled = false;
         inGameCanvas.enabled = true;
@@ -110,10 +114,13 @@ public class GameManager : MonoBehaviour
             mediumID = (Random.Range(0,4));
             heavyID = (Random.Range(0,4));
         }
-        if((intiateSpawn == true) && (waveCount >= 1) && (GameObject.FindGameObjectsWithTag("Enemy").Length == 0))
+        if((intiateSpawn == true) && (waveCount >= 1) && (GameObject.FindGameObjectsWithTag("Enemy").Length == 0) && (UI.GetComponent<UImanager>().sceneNumber %3 != 1))
         {          
-            
             StartCoroutine(WaveSpawn());
+        }
+        else if((intiateSpawn = true) && (UI.GetComponent<UImanager>().sceneNumber %3 == 1))
+        {
+            GameObject boss = Instantiate(bossPrefabs[bossID]);
         }
         if((waveCount < 1) && (GameObject.FindGameObjectsWithTag("Enemy").Length == 0) && canEnd)
         {
@@ -152,7 +159,7 @@ public class GameManager : MonoBehaviour
         {
         canEnd = true;
         }
-        intiateSpawn = false;
+        intiateSpawn = true;
     }
 
     void End()
@@ -165,6 +172,7 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         UI.GetComponent<UImanager>().canLoad = true;
         UI.GetComponent<UImanager>().reroll = true;
+        UI.GetComponent<UImanager>().o = 30;
 
         //letter of introduction
         if(UI.GetComponent<UImanager>().hasTrinket[6] && pl.GetComponent<plHealth>().hasLetterBuff)

@@ -17828,7 +17828,7 @@ GameObject:
   - component: {fileID: 3732334186094485927}
   - component: {fileID: 5893942754603611802}
   - component: {fileID: 6545015444060170874}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Mysterious slightly-less-shiny-berry
   m_TagString: Interactable
   m_Icon: {fileID: 0}
