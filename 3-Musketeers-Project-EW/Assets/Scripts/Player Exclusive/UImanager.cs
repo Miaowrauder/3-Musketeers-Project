@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UImanager : MonoBehaviour
 {
-    public GameObject GameM, pl;
-    public bool canLoad, reroll;
+    public GameObject GameM, pl, bossBits;
+    public TMP_Text bossName;
+    public Slider bossBar;
+    public bool reroll, instantEnd;
     public TMP_Text[] buttonText;
     public string[] buttonString;
     public int sceneNumber, upgradeID;
@@ -16,21 +19,100 @@ public class UImanager : MonoBehaviour
     public int[] randomIDs;
     public bool[] hasTrinket;
 
+    public Canvas endCanvas, inGameCanvas, mainMenuCanvas, settingsCanvas, controlsCanvas, loadingCanvas, pauseCanvas;
+
     public int o = 0; //allows to loop parry reroll a few times
 
     // Start is called before the first frame update
     void Start()
     {
-        
+       bossBits.transform.position = new Vector3 (bossBits.transform.position.x, bossBits.transform.position.y+120, bossBits.transform.position.z);
+
+       endCanvas.enabled = false;
+       inGameCanvas.enabled = false;
+       mainMenuCanvas.enabled = true;
+       settingsCanvas.enabled = false;
+       controlsCanvas.enabled = false;
+       loadingCanvas.enabled = false;
+       pauseCanvas.enabled = false;
+    }
+
+    public void OnPlay() //play from menu
+    {
+        mainMenuCanvas.enabled = false;
+        loadingCanvas.enabled = true;
+        OnEnd();
+    }    
+    public void OnExit() //exit from menu
+    {
+        Application.Quit();
+    }
+
+    public void OnSettings() //settings from menu, controls, or in game
+    {
+        pauseCanvas.enabled = false;
+        settingsCanvas.enabled = true;
+    }
+
+    public void OnControls()// controls from main or pause
+    {
+        pauseCanvas.enabled = false;
+        controlsCanvas.enabled = true;
+    }
+    public void OnPause()
+    {
+        inGameCanvas.enabled = false;
+        pauseCanvas.enabled = true;
+    }
+
+    public void OnMain()
+    {
+       endCanvas.enabled = false;
+       inGameCanvas.enabled = false;
+       mainMenuCanvas.enabled = true;
+       settingsCanvas.enabled = false;
+       controlsCanvas.enabled = false;
+       loadingCanvas.enabled = false;
+       pauseCanvas.enabled = false;
+       
+       Time.timeScale = 1f;
+       SceneManager.LoadScene("Main Menu");
+       Destroy(GameM);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if((sceneNumber == 0) && canLoad)
+
+        if(sceneNumber >= 1)
         {
-            OnEnd();
-            canLoad = false;
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                if(pauseCanvas.enabled == true)
+                {
+                    pauseCanvas.enabled = false;
+                    inGameCanvas.enabled = true;
+                    Time.timeScale = 1f;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+                else if((pauseCanvas.enabled == false) && (controlsCanvas.enabled == false) && (settingsCanvas.enabled == false) && (endCanvas.enabled == false))
+                {
+                    pauseCanvas.enabled = true;
+                    inGameCanvas.enabled = false;
+                    Time.timeScale = 0f;
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                else if(settingsCanvas.enabled == true)
+                {
+                    settingsCanvas.enabled = false;
+                    pauseCanvas.enabled = true;
+                }
+                else if(controlsCanvas.enabled == true)
+                {
+                    controlsCanvas.enabled = false;
+                    pauseCanvas.enabled = true;
+                }
+            }
         }
 
         if(reroll)
@@ -62,7 +144,15 @@ public class UImanager : MonoBehaviour
            {
             UpgradeText();
            }
+
         }
+
+        if(instantEnd)
+           {
+            instantEnd = false;
+            OnEnd();
+           }
+        
 
 
     }
@@ -71,7 +161,18 @@ public class UImanager : MonoBehaviour
     {
 
         sceneNumber +=1;
-        SceneManager.LoadScene("Scene 1");
+        loadingCanvas.enabled = true;
+        //modulus was NOT working at all, I tried so many ways and this was a last resort...
+        if((sceneNumber == 3) || (sceneNumber == 6) || (sceneNumber == 9) || (sceneNumber == 12) || (sceneNumber == 15) || (sceneNumber == 18) || (sceneNumber == 32))
+        {
+            bossBits.transform.position = new Vector3 (bossBits.transform.position.x, bossBits.transform.position.y-120, bossBits.transform.position.z);
+            SceneManager.LoadScene("Scene 2");
+        }
+        else
+        {
+            SceneManager.LoadScene("Scene 1");
+        }
+        
         
     }
 
@@ -431,15 +532,7 @@ public class UImanager : MonoBehaviour
             hasTrinket[10] = true;
         }
 
-        sceneNumber +=1;
-        if(sceneNumber%3 == 1)
-        {
-            SceneManager.LoadScene("Scene 2");
-        }
-        else if(sceneNumber%3 != 1)
-        {
-            SceneManager.LoadScene("Scene 1");
-        }
+        OnEnd();
         
     }
     

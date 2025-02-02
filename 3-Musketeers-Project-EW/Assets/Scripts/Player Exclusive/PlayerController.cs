@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     {
         gravityActive = true;
         moveSpeed = baseSpeed;
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -160,7 +159,7 @@ public class PlayerController : MonoBehaviour
         {
             if(isSprinting && (this.GetComponent<cooldownManager>().dodgeCd <= 0))
             {
-                speedyTicks = 30;
+                speedyTicks = 45;
                 this.GetComponent<cooldownManager>().dodgeCd = 2;
             }
             isCrouching = true;

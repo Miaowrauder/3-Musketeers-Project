@@ -120,9 +120,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DotID: 1
   statusDuration: 5
-  TickDps: 5
+  TickDps: 10
   lifespan: 10
-  scale: 5
+  scale: 6
   self: {fileID: 2309893758193197899}
   isDestroying: 0
   isEnemy: 1

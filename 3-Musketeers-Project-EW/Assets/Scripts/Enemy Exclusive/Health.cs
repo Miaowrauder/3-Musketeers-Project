@@ -8,11 +8,11 @@ public class Health : MonoBehaviour
     float maxHp;
     public float iFrames;
     public float incomingDmg;
-    public bool isDamageable;
+    public bool isDamageable, isBoss;
     public bool canCountdown;
     public float dmgRecievedMult;
 
-    GameObject gm;
+    GameObject gm, ui;
 
 
     // Start is called before the first frame update
@@ -23,11 +23,22 @@ public class Health : MonoBehaviour
         canCountdown = true;
         isDamageable = true;
         maxHp = hp;
+
+        if(isBoss)
+        {
+            ui = GameObject.FindWithTag("UImanager");
+            ui.GetComponent<UImanager>().bossName.text = "Cardinal's Elementalist";
+            ui.GetComponent<UImanager>().bossBar.maxValue = maxHp;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(isBoss)
+        {
+            ui.GetComponent<UImanager>().bossBar.value = hp;
+        }
 
         if((incomingDmg > 0f) && (isDamageable))
         {
@@ -36,6 +47,12 @@ public class Health : MonoBehaviour
     
         if (hp <= 0f)
         {
+            if(isBoss)
+            {
+                ui.GetComponent<UImanager>().bossBits.transform.position = new Vector3 (ui.GetComponent<UImanager>().bossBits.transform.position.x, ui.GetComponent<UImanager>().bossBits.transform.position.y+120, ui.GetComponent<UImanager>().bossBits.transform.position.z);
+                GameObject gm = GameObject.Find("GameManager_DND");
+                gm.GetComponent<GameManager>().canEnd = true;
+            }
             Destroy(gameObject); 
         }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class AssemblyManager : MonoBehaviour
 {
     public Transform leftPos, rightPos, featurePos, bossPos;
-    public GameObject[] halfPrefab, featurePrefab0, featurePrefab1, featurePrefab2, environment1, environment2, bossArena;
+    public GameObject[] halfPrefab, featurePrefab0, featurePrefab1, featurePrefab2, environment1, environment2, bossPrefab;
     public bool isBoss;
     public Material[] materials1, materials2;
 
@@ -17,16 +17,20 @@ public class AssemblyManager : MonoBehaviour
     // Awake is called even beforer the first frame update
     void Awake()
     {
+        manager = GameObject.Find("GameManager_DND");
         if(!isBoss)
         {
         lHalf = Instantiate(halfPrefab[Random.Range(0, (halfPrefab.Length))], leftPos.transform.position, leftPos.transform.rotation);
         rHalf = Instantiate(halfPrefab[Random.Range(0, (halfPrefab.Length))], rightPos.transform.position, rightPos.transform.rotation);
+        manager.GetComponent<GameManager>().canSpawnBoss = false;
         }
         else if(isBoss)
         {
             bossID = Random.Range(0,0);//change to match number of bosses if time permits adding multiple
-            bArena = Instantiate((bossArena[bossID]), bossPos.transform.position, bossPos.transform.rotation);
+            bArena = Instantiate((bossPrefab[bossID]), bossPos.transform.position, bossPos.transform.rotation);
+            manager.GetComponent<GameManager>().bossLimit = 1;
             manager.GetComponent<GameManager>().bossID = bossID;
+            manager.GetComponent<GameManager>().canSpawnBoss = true;
         }
     }
 
@@ -45,7 +49,7 @@ public class AssemblyManager : MonoBehaviour
         environment1 = (GameObject.FindGameObjectsWithTag("Environment"));
         environment2 = (GameObject.FindGameObjectsWithTag("Environment2"));
 
-        manager = GameObject.Find("GameManager_DND");
+        
         manager.GetComponent<GameManager>().enterScene = true;
 
 
@@ -75,6 +79,7 @@ public class AssemblyManager : MonoBehaviour
         {
             environment2[i].GetComponent<Renderer>().material = materials2[(manager.GetComponent<GameManager>().themeID)];
         }
+
     }
 
     // Update is called once per frame

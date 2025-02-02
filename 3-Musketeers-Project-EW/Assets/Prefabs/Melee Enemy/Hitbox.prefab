@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2966830191170328893}
   serializedVersion: 2
   m_LocalRotation: {x: -0.40965334, y: 3.6223327e-10, z: 0.91224134, w: -0.000000029525173}
-  m_LocalPosition: {x: -0.294, y: -0, z: -0.119}
+  m_LocalPosition: {x: -0.294, y: -0.099, z: -0.119}
   m_LocalScale: {x: 0.61993, y: 0.61993, z: 0.61993}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -478,8 +478,8 @@ Transform:
   m_GameObject: {fileID: 6179155806790510737}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.24010237, z: -0, w: 0.97074765}
-  m_LocalPosition: {x: 4.8106575, y: 0.13901483, z: -3.7967548}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.8106575, y: 0.113, z: -3.7967548}
+  m_LocalScale: {x: 1, y: 1.6887, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6396773098194422798}
@@ -528,14 +528,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   self: {fileID: 6179155806790510737}
+  pl: {fileID: 0}
   scale: 1
   meleeDmg: 0
   rangedDmg: 0
   magicDmg: 0
   lifespan: 0
   tempTEST: 0
+  iconID: 0
   canBreak: 0
   isEnemy: 1
+  isIcon: 0
+  isGrenade: 0
 --- !u!1 &8512102432637847939
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +569,7 @@ Transform:
   m_GameObject: {fileID: 8512102432637847939}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.218915, z: -0, w: 0.97574395}
-  m_LocalPosition: {x: 0.309, y: 0, z: 1.248}
+  m_LocalPosition: {x: 0.309, y: -0.099, z: 1.248}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

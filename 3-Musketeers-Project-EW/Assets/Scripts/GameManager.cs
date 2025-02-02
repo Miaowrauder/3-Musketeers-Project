@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public float difficultyScaling, waveCount, enemyCount;
 
-    public bool intiateSpawn, enterScene, isTesting;
+    public bool initiateSpawn, enterScene, isTesting, canSpawnBoss, canBake;
 
     public GameObject[] enemySet, spawnSpots, plSpawn, bossPrefabs;
 
@@ -24,29 +24,24 @@ public class GameManager : MonoBehaviour
 
     [Header("Game End Stuff")]
 
-    public Canvas endCanvas, inGameCanvas;
+    
 
-    bool canEnd;
+    public bool canEnd;
+
+    public int bossLimit;
     
 
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
-        endCanvas.enabled = false;
-        inGameCanvas.enabled = true;
         themeID = (Random.Range(0,3));
-
-        if(!isTesting)
-        {
-        UI.GetComponent<UImanager>().canLoad = true;
-        }
         
     }
 
     void NewScene()
     {
-
+        Cursor.lockState = CursorLockMode.Locked;
         for (int j = 0; j < spawnSpots.Length; j++)
         {
             spawnSpots[j] = null; 
@@ -56,9 +51,7 @@ public class GameManager : MonoBehaviour
             plSpawn[k] = null; 
         }
 
-        navmesh = GameObject.Find("NavMesh");
-        navmeshSurface = navmesh.GetComponent<NavMeshSurface>();
-        navmeshSurface.BuildNavMesh();
+        Bake();
 
         plSpawn = (GameObject.FindGameObjectsWithTag("PlayerSpawn"));
         pl = (GameObject.FindGameObjectWithTag("Player"));
@@ -78,7 +71,7 @@ public class GameManager : MonoBehaviour
             pl.GetComponent<PlayerController>().crouchSpeed *= 1.5f;
         }
 
-        if(UI.GetComponent<UImanager>().sceneNumber %3 != 1)
+        if(canSpawnBoss == false)
         {
             spawnSpots = (GameObject.FindGameObjectsWithTag("SpawnSpot"));
             waveCount = (1f + (difficultyScaling/2));
@@ -86,7 +79,7 @@ public class GameManager : MonoBehaviour
             mediumID = (Random.Range(0,4));
             heavyID = (Random.Range(0,4));
 
-            enemyCount = (4f + (difficultyScaling*2));
+            enemyCount = (4f + (difficultyScaling*3));
         }
         
 
@@ -94,10 +87,23 @@ public class GameManager : MonoBehaviour
 
         
 
-        endCanvas.enabled = false;
-        inGameCanvas.enabled = true;
-        intiateSpawn = true;
+        UI.GetComponent<UImanager>().endCanvas.enabled = false;
+        UI.GetComponent<UImanager>().controlsCanvas.enabled = false;
+        UI.GetComponent<UImanager>().settingsCanvas.enabled = false;
+        UI.GetComponent<UImanager>().mainMenuCanvas.enabled = false;
+        UI.GetComponent<UImanager>().loadingCanvas.enabled = false;
+        UI.GetComponent<UImanager>().inGameCanvas.enabled = true;
+        initiateSpawn = true;
         Cursor.lockState = CursorLockMode.Locked;
+        
+    }
+
+    void Bake()
+    {
+        navmesh = null;
+        navmesh = GameObject.Find("NavMesh");
+        navmeshSurface = navmesh.GetComponent<NavMeshSurface>();
+        navmeshSurface.BuildNavMesh();
     }
 
     // Update is called once per frame
@@ -114,23 +120,30 @@ public class GameManager : MonoBehaviour
             mediumID = (Random.Range(0,4));
             heavyID = (Random.Range(0,4));
         }
-        if((intiateSpawn == true) && (waveCount >= 1) && (GameObject.FindGameObjectsWithTag("Enemy").Length == 0) && (UI.GetComponent<UImanager>().sceneNumber %3 != 1))
+        if((initiateSpawn == true) && (waveCount >= 1) && (GameObject.FindGameObjectsWithTag("Enemy").Length == 0) && !canSpawnBoss )
         {          
             StartCoroutine(WaveSpawn());
         }
-        else if((intiateSpawn = true) && (UI.GetComponent<UImanager>().sceneNumber %3 == 1))
+        else if((initiateSpawn == true) && canSpawnBoss && (bossLimit > 0))
         {
+            bossLimit -= 1;
             GameObject boss = Instantiate(bossPrefabs[bossID]);
         }
         if((waveCount < 1) && (GameObject.FindGameObjectsWithTag("Enemy").Length == 0) && canEnd)
         {
             End();
         }
+
+        if(canBake)
+        {
+            canBake = false;
+            Bake();
+        }
     }
 
     private IEnumerator WaveSpawn()
     {
-        intiateSpawn = false;
+        initiateSpawn = false;
 
         for(int i = 0; i < enemyCount; i++)
         {
@@ -149,30 +162,47 @@ public class GameManager : MonoBehaviour
               GameObject enemy = Instantiate(enemySet[heavyID], spawnSpots[Random.Range(0, spawnSpots.Length)].transform.position, Quaternion.identity);
             }
             
-            yield return new WaitForSeconds((8f/difficultyScaling));
+            yield return new WaitForSeconds((6f/difficultyScaling));
             
         }
 
         waveCount -= 1;
 
+        if(waveCount >= 1)
+        {
+            initiateSpawn = true;
+        }
+
         if(waveCount < 1f)
         {
         canEnd = true;
         }
-        intiateSpawn = true;
     }
 
     void End()
     {
         canEnd = false;
+
+        if(canSpawnBoss)
+        {
         difficultyScaling += 0.1f;
         difficultyScaling *= 1.2f;
-        endCanvas.enabled = true;
-        inGameCanvas.enabled = false;
-        Cursor.lockState = CursorLockMode.None;
-        UI.GetComponent<UImanager>().canLoad = true;
+        UI.GetComponent<UImanager>().endCanvas.enabled = true;
+        UI.GetComponent<UImanager>().inGameCanvas.enabled = false;
         UI.GetComponent<UImanager>().reroll = true;
         UI.GetComponent<UImanager>().o = 30;
+        Cursor.lockState = CursorLockMode.None;
+        themeID = (Random.Range(0,3));
+        }
+        else if(!canSpawnBoss)
+        {
+            UI.GetComponent<UImanager>().instantEnd = true;
+        }
+        
+        
+        
+        
+        
 
         //letter of introduction
         if(UI.GetComponent<UImanager>().hasTrinket[6] && pl.GetComponent<plHealth>().hasLetterBuff)

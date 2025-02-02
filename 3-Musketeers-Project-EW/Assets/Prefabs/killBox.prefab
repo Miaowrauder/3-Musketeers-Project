@@ -80,8 +80,8 @@ MonoBehaviour:
   scale: 135
   meleeDmg: 0
   rangedDmg: 0
-  magicDmg: 9999
-  lifespan: 0.1
+  magicDmg: 99999
+  lifespan: 1
   tempTEST: 0
   iconID: 0
   canBreak: 0

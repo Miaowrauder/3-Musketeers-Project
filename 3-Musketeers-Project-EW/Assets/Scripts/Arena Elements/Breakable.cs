@@ -7,12 +7,14 @@ public class Breakable : MonoBehaviour
     public float hp, maxHp;
     public float incomingDmg, iFrames;
     bool isDamageable, canCountdown;
-    public GameObject item;
+    public GameObject item, item2, gm;
     // Start is called before the first frame update
     void Start()
     {
         hp = maxHp;
         canCountdown = true;
+        gm = GameObject.Find("GameManager_DND");
+        item2.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,7 +35,9 @@ public class Breakable : MonoBehaviour
 
         if (hp <= 0f)
         {
-            item.GetComponent<Rigidbody>().isKinematic = false;
+            item.SetActive(false);
+            item2.SetActive(true);
+            gm.GetComponent<GameManager>().canBake = true;
             Destroy(this.gameObject);
         }
     }

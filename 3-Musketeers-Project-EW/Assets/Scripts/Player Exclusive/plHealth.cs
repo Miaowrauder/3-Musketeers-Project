@@ -176,9 +176,9 @@ public class plHealth : MonoBehaviour
 
     void GameOver()
     {
-        //reloads scene, to be replaced with back to main menu and character reset
         Destroy(manager);
-        SceneManager.LoadScene("Testing Scene");
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("Main Menu");
     }
 
     void TakeMagicDmg()
