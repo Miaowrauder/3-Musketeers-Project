@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     Vector2 inputs;
 
     public CharacterController controller;
-    public GameObject cam;
+    public GameObject cam, noiseZone;
     public GameObject playerHead;
 
     bool gravityActive;
@@ -79,7 +79,9 @@ public class PlayerController : MonoBehaviour
 
         if (controller.isGrounded && Input.GetButtonDown("Jump"))
         {
+            noiseZone.GetComponent<NoiseScaler>().scale += 3f;
             gravity = Mathf.Sqrt(jumpForce);
+            noiseZone.GetComponent<NoiseScaler>().scale -= 3f;
         }
         //else if (controller.isGrounded && Input.GetButtonDown("Jump") && isSprinting)
         //{
@@ -110,11 +112,13 @@ public class PlayerController : MonoBehaviour
         {
             isSprinting = true;
             moveSpeed = sprintSpeed;
+            noiseZone.GetComponent<NoiseScaler>().scale += 7f;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift) && !isCrouching)
         {
             isSprinting = false;
             moveSpeed = baseSpeed;
+            noiseZone.GetComponent<NoiseScaler>().scale -= 7f;
         }
 
     }
@@ -139,7 +143,9 @@ public class PlayerController : MonoBehaviour
     {
         if(coll.CompareTag("MantleCollider") && (Input.GetKey(KeyCode.Space)))
         {
+            noiseZone.GetComponent<NoiseScaler>().scale += 1f;
             gravity = Mathf.Sqrt(jumpForce * 1f);
+            noiseZone.GetComponent<NoiseScaler>().scale -= 1f;
         }
         
         
@@ -157,6 +163,7 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftControl))
         {
+            noiseZone.GetComponent<NoiseScaler>().scale -= 3f;
             if(isSprinting && (this.GetComponent<cooldownManager>().dodgeCd <= 0))
             {
                 speedyTicks = 45;
@@ -169,6 +176,7 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetKeyUp(KeyCode.LeftControl))
         {
+            noiseZone.GetComponent<NoiseScaler>().scale += 3f;
             speedyTicks = 0;
             isCrouching = false;
             moveSpeed = baseSpeed;

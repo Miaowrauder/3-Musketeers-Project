@@ -36,6 +36,7 @@ public class EnemyMove : MonoBehaviour
     GameObject plObject, gm;
 
     public GameObject head;
+    public bool canSeePlayer;
 
     NavMeshAgent navAgent;
  
@@ -55,14 +56,16 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        head.transform.LookAt(plObject.transform.position);
+        
         Move();
 
-            if(!isAttacking)
+            if(canSeePlayer)
             {
+                head.transform.LookAt(plObject.transform.position);
 
-            if (Vector3.Distance(plObject.transform.position, transform.position) <= attackDistance)
+            if (!isAttacking)
             {
+                
                 StartCoroutine(Attack());
             }
             
@@ -73,7 +76,10 @@ public class EnemyMove : MonoBehaviour
 
     void Move()
     {
+        if(canSeePlayer)
+        {
         navAgent.destination = plObject.transform.position;
+        }
     }
 
     private IEnumerator Attack()
@@ -137,6 +143,14 @@ public class EnemyMove : MonoBehaviour
 
         isAttacking = false;
 
+    }
+
+    void OnTriggerEnter (Collider coll)
+    {
+        if(coll.tag == ("Noise"))
+        {
+            canSeePlayer = true;
+        }
     }
 
 }

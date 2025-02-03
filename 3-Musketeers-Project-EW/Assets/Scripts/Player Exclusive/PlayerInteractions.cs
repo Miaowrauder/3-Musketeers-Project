@@ -33,7 +33,7 @@ public class PlayerInteractions : MonoBehaviour
             castTime = false;
         }
 
-        if (Physics.SphereCast(cam.transform.position, castRadius, cam.transform.forward, out hit, lookDistance, layerMask)) //add childcount
+        if (Physics.SphereCast(cam.transform.position, castRadius, cam.transform.forward, out hit, lookDistance, layerMask, QueryTriggerInteraction.Ignore)) //add childcount
         {
             if((hand.transform.childCount == 0) && ((hit.collider.gameObject.CompareTag("GrenadePickup")) || hit.collider.gameObject.CompareTag("ConsumablePickup")))
             {
@@ -106,7 +106,7 @@ public class PlayerInteractions : MonoBehaviour
 
     void InfiniteRaycast()
     {
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 999f, layerMaskInf))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 999f, layerMaskInf, QueryTriggerInteraction.Ignore))
         {
             if((hit.collider.gameObject.CompareTag("Enemy")))
                 {

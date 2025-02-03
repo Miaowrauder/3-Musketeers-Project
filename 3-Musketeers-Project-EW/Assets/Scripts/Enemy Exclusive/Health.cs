@@ -38,6 +38,7 @@ public class Health : MonoBehaviour
         if(isBoss)
         {
             ui.GetComponent<UImanager>().bossBar.value = hp;
+            this.GetComponent<EnemyMove>().canSeePlayer = true;
         }
 
         if((incomingDmg > 0f) && (isDamageable))
@@ -69,10 +70,16 @@ public class Health : MonoBehaviour
         
 
     void TakeDmg()
-    {             
+    {   
+        if(this.GetComponent<EnemyMove>().canSeePlayer == false)
+        {
+            incomingDmg *= 2f;
+        }       
         hp -= incomingDmg;
         incomingDmg = 0;
         isDamageable = false;   
+
+        this.GetComponent<EnemyMove>().canSeePlayer = true;   
     }
 
     private IEnumerator IframeCounter()
