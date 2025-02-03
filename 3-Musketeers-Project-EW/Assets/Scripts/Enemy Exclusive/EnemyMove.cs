@@ -38,6 +38,8 @@ public class EnemyMove : MonoBehaviour
     public GameObject head;
     public bool canSeePlayer;
 
+    public GameObject target;
+
     NavMeshAgent navAgent;
  
     // Start is called before the first frame update
@@ -70,6 +72,10 @@ public class EnemyMove : MonoBehaviour
             }
             
             }
+            else if(!canSeePlayer && (target != null))
+            {
+                head.transform.LookAt(target.transform.position);
+            }
             
         
     }
@@ -79,6 +85,10 @@ public class EnemyMove : MonoBehaviour
         if(canSeePlayer)
         {
         navAgent.destination = plObject.transform.position;
+        }
+        else if(!canSeePlayer && (target != null))
+        {
+            navAgent.destination = target.transform.position;
         }
     }
 

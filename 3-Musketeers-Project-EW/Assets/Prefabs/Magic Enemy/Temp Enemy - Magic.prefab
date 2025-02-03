@@ -2074,6 +2074,7 @@ GameObject:
   - component: {fileID: 1138308374480330351}
   - component: {fileID: 860553711189395939}
   - component: {fileID: 1593866156331518873}
+  - component: {fileID: 6224184495998259681}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -2152,6 +2153,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6224184495998259681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6357481947275978823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ad643bbecc1cb49bbf4c6a35ddac41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visionRange: 15
+  visionAngle: 60
+  forgetTime: 5
+  player: {fileID: 0}
+  playerCorners: []
+  spawnSpots: []
+  enemySelf: {fileID: 7492605530738408498}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &6562533499165455659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2750,8 +2773,11 @@ MonoBehaviour:
   iFrames: 0
   incomingDmg: 0
   isDamageable: 0
+  isBoss: 0
   canCountdown: 0
   dmgRecievedMult: 0.5
+  alertPrefab: {fileID: 973480311388888332, guid: 6c1015ac70bebd54f9a2af19ffc5fef1,
+    type: 3}
 --- !u!114 &571931133206792858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2789,6 +2815,8 @@ MonoBehaviour:
   magicThing: {fileID: 5137949614910051611, guid: 03e7cf9174ba944459b91a01e95c8cbb,
     type: 3}
   head: {fileID: 6357481947275978823}
+  canSeePlayer: 0
+  target: {fileID: 0}
 --- !u!54 &2209166480570923822
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2829,6 +2857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   self: {fileID: 7492605530738408498}
+  ui: {fileID: 0}
   DotDmg:
   - 0
   - 0

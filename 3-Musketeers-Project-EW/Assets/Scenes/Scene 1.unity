@@ -578,6 +578,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b1b3464fa40cc904cb7d49a5b0529e07, type: 2}
   - {fileID: 2100000, guid: 54e3463e99256b647aa0ddc8f2aeb668, type: 2}
   bossID: 0
+  spawnSpots: []
+  enemies:
+  - {fileID: 0}
+  canWalkabout: 0
 --- !u!1 &822681744
 GameObject:
   m_ObjectHideFlags: 0

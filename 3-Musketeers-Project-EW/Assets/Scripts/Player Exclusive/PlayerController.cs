@@ -58,6 +58,12 @@ public class PlayerController : MonoBehaviour
             controller.Move(movement * (moveSpeed*(speedyTicks/2)) * Time.deltaTime); 
             speedyTicks -= 1;
         }
+
+        if(!isSprinting && !isCrouching)
+        {
+            noiseZone.GetComponent<NoiseScaler>().scale = 6f;
+            moveSpeed = baseSpeed;
+        }
     }
 
     void Rotation()
@@ -114,7 +120,7 @@ public class PlayerController : MonoBehaviour
             moveSpeed = sprintSpeed;
             noiseZone.GetComponent<NoiseScaler>().scale += 7f;
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift) && !isCrouching)
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             isSprinting = false;
             moveSpeed = baseSpeed;

@@ -11,12 +11,17 @@ public class AssemblyManager : MonoBehaviour
 
     public int bossID;
 
+    int h;
+
 
 
     GameObject lHalf, rHalf, feature, manager, bArena;
+    public GameObject[] spawnSpots, enemies;
+    public bool canWalkabout;
     // Awake is called even beforer the first frame update
     void Awake()
     {
+        
         manager = GameObject.Find("GameManager_DND");
         if(!isBoss)
         {
@@ -67,6 +72,8 @@ public class AssemblyManager : MonoBehaviour
             {
                 feature = Instantiate(featurePrefab2[(Random.Range(0,featurePrefab2.Length))], featurePos.transform.position, featurePos.transform.rotation);
             }
+
+            spawnSpots = GameObject.FindGameObjectsWithTag("SpawnSpot");
         }
         
 
@@ -85,6 +92,37 @@ public class AssemblyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if((!isBoss) && (canWalkabout == true))
+        {
+            canWalkabout = false;
+            StartCoroutine(Walkabout());
+        }
+    }
+
+    private IEnumerator Walkabout()
+    {
         
+        //if(enemies[0] != null)
+        //{
+            for(int i = 0; i < enemies.Length; i++)
+            {
+                enemies[i] = null;
+            }
+        //}
+        
+
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        for(int i = 0; i < enemies.Length; i++)
+        {
+            if(enemies[i].GetComponent<EnemyMove>().canSeePlayer == false)
+            {
+                enemies[i].GetComponent<EnemyMove>().target = spawnSpots[Random.Range(0, spawnSpots.Length)];
+            }
+        }
+
+        yield return new WaitForSeconds(8f);
+
+        canWalkabout = true;
     }
 }

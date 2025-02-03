@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class NoiseScaler : MonoBehaviour
 {
-    public float scale;
+    public float scale, lifespan;
     public GameObject pl;
+    public bool isDestroying, isPlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,23 @@ public class NoiseScaler : MonoBehaviour
     void Update()
     {
         transform.localScale = new Vector3(scale, scale, scale);
-        transform.position = pl.transform.position;
+
+        if(isPlayer)
+        {
+            transform.position = pl.transform.position;
+        }
+        
+
+        if(!isDestroying)
+        {
+            isDestroying = true;
+            StartCoroutine(Destroy());
+        }
+    }
+
+    private IEnumerator Destroy()
+    {
+        yield return new WaitForSeconds(lifespan);
+        Destroy(this.gameObject);
     }
 }

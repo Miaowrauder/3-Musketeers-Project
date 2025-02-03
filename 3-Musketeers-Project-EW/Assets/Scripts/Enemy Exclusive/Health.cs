@@ -12,6 +12,8 @@ public class Health : MonoBehaviour
     public bool canCountdown;
     public float dmgRecievedMult;
 
+    public GameObject alertPrefab;
+
     GameObject gm, ui;
 
 
@@ -74,7 +76,9 @@ public class Health : MonoBehaviour
         if(this.GetComponent<EnemyMove>().canSeePlayer == false)
         {
             incomingDmg *= 2f;
-        }       
+        } 
+
+        GameObject noise = Instantiate(alertPrefab, this.transform.position, Quaternion.identity); 
         hp -= incomingDmg;
         incomingDmg = 0;
         isDamageable = false;   

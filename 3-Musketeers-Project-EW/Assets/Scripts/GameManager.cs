@@ -25,11 +25,11 @@ public class GameManager : MonoBehaviour
     [Header("Game End Stuff")]
 
     
-
+    GameObject assemMan;
     public bool canEnd;
 
     public int bossLimit;
-    
+    int tell;    
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour
 
     void NewScene()
     {
+            tell = 1;
+     
+        
+
         Cursor.lockState = CursorLockMode.Locked;
         for (int j = 0; j < spawnSpots.Length; j++)
         {
@@ -163,6 +167,13 @@ public class GameManager : MonoBehaviour
             }
             
             yield return new WaitForSeconds((6f/difficultyScaling));
+
+            if(tell > 0)
+            {
+                tell--;
+                assemMan = GameObject.Find("Environment");
+                assemMan.GetComponent<AssemblyManager>().canWalkabout = true;
+            }
             
         }
 
