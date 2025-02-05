@@ -54,6 +54,7 @@ public class Health : MonoBehaviour
             {
                 ui.GetComponent<UImanager>().bossBits.transform.position = new Vector3 (ui.GetComponent<UImanager>().bossBits.transform.position.x, ui.GetComponent<UImanager>().bossBits.transform.position.y+120, ui.GetComponent<UImanager>().bossBits.transform.position.z);
                 GameObject gm = GameObject.Find("GameManager_DND");
+                gm.GetComponent<GameManager>().themeReroll = true;
                 gm.GetComponent<GameManager>().canEnd = true;
             }
             Destroy(gameObject); 
@@ -78,7 +79,11 @@ public class Health : MonoBehaviour
             incomingDmg *= 2f;
         } 
 
-        GameObject noise = Instantiate(alertPrefab, this.transform.position, Quaternion.identity); 
+        if(!isBoss)
+        {
+            GameObject noise = Instantiate(alertPrefab, this.transform.position, Quaternion.identity); 
+        }
+        
         hp -= incomingDmg;
         incomingDmg = 0;
         isDamageable = false;   

@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     
     GameObject assemMan;
-    public bool canEnd;
+    public bool canEnd, themeReroll;
 
     public int bossLimit;
     int tell;    
@@ -143,6 +143,12 @@ public class GameManager : MonoBehaviour
         {
             canBake = false;
             Bake();
+        }
+
+        if(themeReroll)
+        {
+            themeReroll = false;
+            themeID = (Random.Range(0,3));
         }
     }
 
