@@ -131,7 +131,8 @@ public class GameManager : MonoBehaviour
         else if((initiateSpawn == true) && canSpawnBoss && (bossLimit > 0))
         {
             bossLimit -= 1;
-            GameObject boss = Instantiate(bossPrefabs[bossID]);
+            spawnSpots[0] = GameObject.FindWithTag("SpawnSpot");
+            GameObject boss = Instantiate(bossPrefabs[bossID], spawnSpots[0].transform.position, Quaternion.identity);
         }
         if((waveCount < 1) && (GameObject.FindGameObjectsWithTag("Enemy").Length == 0) && canEnd)
         {

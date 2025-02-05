@@ -607,6 +607,22 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 2795
       objectReference: {fileID: 0}
+    - target: {fileID: 7162064096521701901, guid: a84ecb2a87370e04f9dd331b6b426b8a,
+        type: 3}
+      propertyPath: enemySet.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162064096521701901, guid: a84ecb2a87370e04f9dd331b6b426b8a,
+        type: 3}
+      propertyPath: spawnSpots.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7162064096521701901, guid: a84ecb2a87370e04f9dd331b6b426b8a,
+        type: 3}
+      propertyPath: enemySet.Array.data[4]
+      value: 
+      objectReference: {fileID: 3284953516006448286, guid: 49d952176b288934aa2d9c4086028365,
+        type: 3}
     - target: {fileID: 7736314238305429082, guid: a84ecb2a87370e04f9dd331b6b426b8a,
         type: 3}
       propertyPath: m_Mesh

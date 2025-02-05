@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 14774262513870501}
   m_Layer: 0
   m_Name: Boss spawn spot
-  m_TagString: PlayerSpawn
+  m_TagString: SpawnSpot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
