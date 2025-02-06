@@ -53,8 +53,17 @@ public class MeleeAttack : MonoBehaviour
 
         if(ui.GetComponent<UImanager>().hasTrinket[4])
         {
-            hitbox.GetComponent<DamageCollider>().meleeDmg = ((damageStat + 15f)*0.7f);
-            hitbox.GetComponent<DamageCollider>().magicDmg = ((damageStat + 15f)*0.3f);
+            if(ui.GetComponent<UImanager>().hasTrinket[9]) //inverts weakness
+            {
+                hitbox.GetComponent<DamageCollider>().meleeDmg = (((damageStat + 15f)*0.7f) / this.GetComponent<StatusManager>().DotDmg[5]);
+                hitbox.GetComponent<DamageCollider>().magicDmg = ((damageStat + 15f)*0.3f);
+            }
+            else
+            {
+                hitbox.GetComponent<DamageCollider>().meleeDmg = (((damageStat + 15f)*0.7f) * this.GetComponent<StatusManager>().DotDmg[5]);
+                hitbox.GetComponent<DamageCollider>().magicDmg = ((damageStat + 15f)*0.3f);
+            }
+            
         }
         else if(ui.GetComponent<UImanager>().hasTrinket[5])
         {
@@ -62,7 +71,15 @@ public class MeleeAttack : MonoBehaviour
         }
         else 
         {
-            hitbox.GetComponent<DamageCollider>().meleeDmg = (damageStat + 15f);
+            if(ui.GetComponent<UImanager>().hasTrinket[9]) //inverts weakness
+            {
+                hitbox.GetComponent<DamageCollider>().meleeDmg = ((damageStat + 15f) / this.GetComponent<StatusManager>().DotDmg[5]);
+            }
+            else
+            {
+                hitbox.GetComponent<DamageCollider>().meleeDmg = ((damageStat + 15f) * this.GetComponent<StatusManager>().DotDmg[5]);
+            }
+            
         }
         
         

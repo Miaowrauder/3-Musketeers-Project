@@ -25,10 +25,10 @@ public class Health : MonoBehaviour
         canCountdown = true;
         isDamageable = true;
         maxHp = hp;
+        ui = GameObject.FindWithTag("UImanager");
 
         if(isBoss)
         {
-            ui = GameObject.FindWithTag("UImanager");
             ui.GetComponent<UImanager>().bossName.text = "Cardinal's Elementalist";
             ui.GetComponent<UImanager>().bossBar.maxValue = maxHp;
         }
@@ -46,6 +46,7 @@ public class Health : MonoBehaviour
         if((incomingDmg > 0f) && (isDamageable))
         {
             TakeDmg();
+            ui.GetComponent<UImanager>().canHitIndi = true;
         }
     
         if (hp <= 0f)

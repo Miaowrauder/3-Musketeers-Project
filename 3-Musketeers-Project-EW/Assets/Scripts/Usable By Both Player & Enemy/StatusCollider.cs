@@ -5,7 +5,7 @@ using UnityEngine;
 public class StatusCollider : MonoBehaviour
 {
     public int DotID;
-    public float statusDuration, TickDps, lifespan, scale;
+    public float statusDuration, TickDps, statMult, lifespan, scale;
     public GameObject self;
     public bool isDestroying, isEnemy, isGrenade;
 
@@ -52,14 +52,28 @@ public class StatusCollider : MonoBehaviour
     {
         if((coll.tag == "Enemy") || (coll.tag == "Player"))
         {
-        if(coll.GetComponent<StatusManager>().DotDuration[DotID] < statusDuration)
-        {
-            coll.GetComponent<StatusManager>().DotDuration[DotID] = statusDuration;
-        }
-        if(coll.GetComponent<StatusManager>().DotDmg[DotID] < (TickDps/2))
-        {
-            coll.GetComponent<StatusManager>().DotDmg[DotID] = (TickDps/2);
-        }
+            if(DotID <= 3)
+            {
+                if(coll.GetComponent<StatusManager>().DotDuration[DotID] < statusDuration)
+                {
+                    coll.GetComponent<StatusManager>().DotDuration[DotID] = statusDuration;
+                }   
+                if(coll.GetComponent<StatusManager>().DotDmg[DotID] < (TickDps/2))
+                {
+                    coll.GetComponent<StatusManager>().DotDmg[DotID] = (TickDps/2);
+                }
+            }
+            else if(DotID > 3)
+            {
+                if(coll.GetComponent<StatusManager>().DotDuration[DotID] < statusDuration)
+                {
+                    coll.GetComponent<StatusManager>().DotDuration[DotID] = statusDuration;
+                }   
+                if(coll.GetComponent<StatusManager>().DotDmg[DotID] > (statMult))
+                {
+                    coll.GetComponent<StatusManager>().DotDmg[DotID] = (statMult);
+                }
+            }
         }
     }
 

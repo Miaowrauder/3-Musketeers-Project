@@ -1098,6 +1098,7 @@ MonoBehaviour:
   isBoss: 1
   canCountdown: 0
   dmgRecievedMult: 0.5
+  alertPrefab: {fileID: 0}
 --- !u!114 &6048765297945662165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1134,7 +1135,10 @@ MonoBehaviour:
   swordDmg: 0
   slashDuration: 0
   magicThing: {fileID: 0}
+  magicThing2: {fileID: 0}
   head: {fileID: 2049669291085842572}
+  canSeePlayer: 0
+  target: {fileID: 0}
 --- !u!54 &4965553091864100219
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1181,7 +1185,13 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  - 0
+  - 0
+  - 0
   DotDuration:
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   - 0

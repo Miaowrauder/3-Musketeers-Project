@@ -2648,6 +2648,7 @@ MonoBehaviour:
   swordDmg: 0
   slashDuration: 0
   magicThing: {fileID: 0}
+  magicThing2: {fileID: 0}
   head: {fileID: 1331339325629689453}
   canSeePlayer: 0
   target: {fileID: 0}
@@ -2697,7 +2698,13 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  - 0
+  - 0
+  - 0
   DotDuration:
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   - 0

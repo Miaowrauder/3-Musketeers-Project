@@ -23,9 +23,23 @@ public class UImanager : MonoBehaviour
 
     public int o = 0; //allows to loop parry reroll a few times
 
+    public float musketeerCharge;
+    public Slider musketeerSlider;
+    public TMP_Text musketext;
+    public bool canSet, canHitIndi;
+    public GameObject centerPos; //for hit indicator
+    public GameObject hitIndi;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+        musketeerCharge = 0f;
+        musketeerSlider.maxValue = 100;
+        
+        
+
        bossBits.transform.position = new Vector3 (bossBits.transform.position.x, bossBits.transform.position.y+120, bossBits.transform.position.z);
 
        endCanvas.enabled = false;
@@ -84,6 +98,19 @@ public class UImanager : MonoBehaviour
     void Update()
     {
 
+        if(canHitIndi)
+        {
+            HitIndicator();
+        }
+
+        musketeerSlider.value = musketeerCharge;
+
+        if((musketeerCharge >= 100f) && (canSet == true) && (pl.GetComponent<MusketeerAbilities>().musketeerID > 0f))
+        {
+            canSet = false;
+            musketext.text = " _/ ";
+        }
+
         if(sceneNumber >= 1)
         {
             if(Input.GetKeyDown(KeyCode.Escape))
@@ -117,10 +144,10 @@ public class UImanager : MonoBehaviour
 
         if(reroll)
         {
-            randomIDs[0] = Random.Range(0, 5);
-            randomIDs[1] = Random.Range(6, 10);
-            randomIDs[2] = Random.Range(11, 16);
-            randomIDs[3] = Random.Range(24, 34);
+            randomIDs[0] = Random.Range(0, 6);
+            randomIDs[1] = Random.Range(6, 11);
+            randomIDs[2] = Random.Range(11, 17);
+            randomIDs[3] = Random.Range(24, 35);
             
             //not a refined reroll system but, well melee parry was meant to be weaker or something anyway so lower rates is a fine outcome for me...
            if((randomIDs[0] == 0) && (pl.GetComponent<plHealth>().meleeParryLevel == 2))
@@ -184,7 +211,7 @@ public class UImanager : MonoBehaviour
         {
             if(pl.GetComponent<plHealth>().meleeParryLevel == 1)
             {
-            buttonString[0] = "Evolve Thy Melee Parry With A Follow-up!";
+            buttonString[0] = "Evolve Thy Melee Parry With a Slashing Counter!";
             }
         }
 
@@ -197,7 +224,7 @@ public class UImanager : MonoBehaviour
             }
             else if(pl.GetComponent<plHealth>().rangedParryLevel == 1)
             {
-            buttonString[0] = "Evolve Thy Ranged Parry To Reflect!";
+            buttonString[0] = "Evolve Thy Ranged Parry With a Reflective Counter!";
             }
         }
 
@@ -210,7 +237,7 @@ public class UImanager : MonoBehaviour
             }
             else if(pl.GetComponent<plHealth>().magicParryLevel == 1)
             {
-            buttonString[0] = "Evolve Thy Magic Parry With A Follow-up!";
+            buttonString[0] = "Evolve Thy Magic Parry With a Homing Counter!";
             }
         }
 
@@ -293,6 +320,18 @@ public class UImanager : MonoBehaviour
         {
             buttonString[2] = "Choice Ability - Mages Musket";
         }
+        else if(randomIDs[2] == 17)
+        {
+            buttonString[2] = "Musketeer Ability - Song of Size";
+        }
+        else if(randomIDs[2] == 18)
+        {
+            buttonString[2] = "Musketeer Ability - Bittersweet Rain";
+        }
+        else if(randomIDs[2] == 19)
+        {
+            buttonString[2] = "Musketeer Ability - Romantic Repentance";
+        }
 
         //lucky buckle
         if(randomIDs[3] == 24)
@@ -357,7 +396,7 @@ public class UImanager : MonoBehaviour
         //anti slowness
         else if(randomIDs[3] == 33)
         {
-            buttonString[3] = "Trinket - ANTI-SLOWNESS-TRINKET";
+            buttonString[3] = "Trinket - Sneakthief's Charm";
         }
      
      
@@ -377,14 +416,17 @@ public class UImanager : MonoBehaviour
         if(upgradeID == 0) //melee parry upgrade
         {
             pl.GetComponent<plHealth>().meleeParryLevel +=1;
+            pl.GetComponent<cooldownManager>().cdText[2].text = " _/ ";
         }
         else if(upgradeID == 1) //ranged parry upgrade
         {
             pl.GetComponent<plHealth>().rangedParryLevel +=1;
+            pl.GetComponent<cooldownManager>().cdText[1].text = " _/ ";
         }
         else if(upgradeID == 2) //magic parry upgrade
         {
             pl.GetComponent<plHealth>().magicParryLevel +=1;
+            pl.GetComponent<cooldownManager>().cdText[3].text = " _/ ";
         }
         else if((upgradeID == 3) || (upgradeID == 4)) //choice level
         {
@@ -392,7 +434,7 @@ public class UImanager : MonoBehaviour
         }
         else if(upgradeID == 5) //musketeer level
         {
-           //Effect be added~ 
+            pl.GetComponent<MusketeerAbilities>().musketeerLevel +=1;
         }
         else if(upgradeID == 6) //health upgrade, full heal
         {
@@ -442,6 +484,24 @@ public class UImanager : MonoBehaviour
         else if(upgradeID == 16) //magic musket
         {
             pl.GetComponent<OffhandFunctions>().abilityID = 5;  
+        }
+        else if(upgradeID == 17) //porthos
+        {
+            pl.GetComponent<MusketeerAbilities>().musketeerID = 1; 
+            musketeerCharge = 100f; 
+            canSet = true;
+        }
+        else if(upgradeID == 18) //athos
+        {
+            pl.GetComponent<MusketeerAbilities>().musketeerID = 2;
+            musketeerCharge = 100f;
+            canSet = true;   
+        }
+        else if(upgradeID == 19) //aramis
+        {
+            pl.GetComponent<MusketeerAbilities>().musketeerID = 3;
+            musketeerCharge = 100f;
+            canSet = true;   
         }
         else if(upgradeID == 24) //buckle
         {
@@ -564,6 +624,18 @@ public class UImanager : MonoBehaviour
 
         upgradeID = randomIDs[3];
         Upgrade();
+        
+    }
+
+    public void HitIndicator()
+    {
+        canHitIndi = false;
+
+        if(centerPos.transform.childCount == 0)
+        {
+            GameObject icon = Instantiate(hitIndi, centerPos.transform.position, Quaternion.identity);
+            icon.transform.parent = centerPos.transform;
+        }
         
     }
 

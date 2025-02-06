@@ -74,7 +74,7 @@ public class PlayerInteractions : MonoBehaviour
                 gmSc.infoText.text = "Depress thine F key to operate!";
                 }
 
-                if((hit.collider.gameObject.CompareTag("Interactable")) && (Input.GetKeyDown(KeyCode.F)))
+                if((hit.collider.gameObject.CompareTag("Interactable")) && (Input.GetKey(KeyCode.F)))
                 {
                     gmSc.infoText.text = "";
 

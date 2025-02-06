@@ -5,7 +5,7 @@ using UnityEngine;
 public class AssemblyManager : MonoBehaviour
 {
     public Transform leftPos, rightPos, featurePos, bossPos;
-    public GameObject[] halfPrefab, featurePrefab0, featurePrefab1, featurePrefab2, environment1, environment2, bossPrefab;
+    public GameObject[] halfPrefab, featurePrefab0, featurePrefab1, featurePrefab2, environment1, environment2, destroyables, breakables, bossPrefab;
     public bool isBoss;
     public Material[] materials1, materials2;
 
@@ -15,7 +15,7 @@ public class AssemblyManager : MonoBehaviour
 
 
 
-    GameObject lHalf, rHalf, feature, manager, bArena;
+    GameObject lHalf, rHalf, feature, manager, bArena, ui, pl;
     public GameObject[] spawnSpots, enemies;
     public bool canWalkabout;
     // Awake is called even beforer the first frame update
@@ -23,6 +23,8 @@ public class AssemblyManager : MonoBehaviour
     {
         
         manager = GameObject.Find("GameManager_DND");
+        ui = GameObject.FindWithTag("UImanager");
+        pl = GameObject.FindWithTag("Player");
         if(!isBoss)
         {
         lHalf = Instantiate(halfPrefab[Random.Range(0, (halfPrefab.Length))], leftPos.transform.position, leftPos.transform.rotation);
@@ -53,6 +55,8 @@ public class AssemblyManager : MonoBehaviour
 
         environment1 = (GameObject.FindGameObjectsWithTag("Environment"));
         environment2 = (GameObject.FindGameObjectsWithTag("Environment2"));
+        destroyables = (GameObject.FindGameObjectsWithTag("Destroyable"));
+        breakables = (GameObject.FindGameObjectsWithTag("Breakable"));
 
         
         manager.GetComponent<GameManager>().enterScene = true;
@@ -86,6 +90,43 @@ public class AssemblyManager : MonoBehaviour
         {
             environment2[i].GetComponent<Renderer>().material = materials2[(manager.GetComponent<GameManager>().themeID)];
         }
+        for (int i = 0; i < breakables.Length; i++)
+        {    
+            int p = Random.Range(0, 2);
+
+            if(p == 0)
+            {
+                breakables[i].GetComponent<Breakable>().maxHp = 0;
+                breakables[i].GetComponent<Breakable>().hp = 0; //chance to destroy posts and triggers elements to fall, neutralises any charge gained from destroy
+                ui.GetComponent<UImanager>().musketeerCharge -= (6 + (pl.GetComponent<MusketeerAbilities>().musketeerLevel * 2));
+            }
+            else if(p == 1)
+            {
+                breakables[i].GetComponent<Renderer>().material = materials2[(manager.GetComponent<GameManager>().themeID)];
+            }
+            
+
+        }
+        for (int i = 0; i < destroyables.Length; i++)
+        {
+            int p = Random.Range(0, 10);
+
+            if(ui.GetComponent<UImanager>().hasTrinket[1])
+            {
+                p = Random.Range(3, 10);
+            }
+            if((p >= 0) && (p <= 5))
+            {
+                Destroy(destroyables[i]);  //essentially 'stops' 60% of pots spawning, or ~40% if rogues map trinkety
+                
+            }
+            else if(p > 5)
+            {
+                destroyables[i].GetComponent<Renderer>().material = materials2[(manager.GetComponent<GameManager>().themeID)];
+            }
+
+        }
+        
 
     }
 

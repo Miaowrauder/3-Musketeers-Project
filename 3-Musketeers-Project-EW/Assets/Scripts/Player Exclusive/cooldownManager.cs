@@ -8,13 +8,12 @@ public class cooldownManager : MonoBehaviour
 
     public float choiceCD, magicParryCd, meleeParryCd, rangedParryCd, dodgeCd;
     bool isTicking;
-
     public TMP_Text[] cdText;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -27,22 +26,22 @@ public class cooldownManager : MonoBehaviour
         if(choiceCD < 0)
         {
             choiceCD = 0f;
-            cdText[0].text = " _/ ";
+            cdText[0].text = " F ";
         }
         if(rangedParryCd < 0)
         {
             rangedParryCd = 0f;
-            cdText[1].text = " _/ ";
+            cdText[1].text = " Q ";
         }
         if(meleeParryCd < 0)
         {
             meleeParryCd = 0f;
-            cdText[2].text = " _/ ";
+            cdText[2].text = " |) ";
         }
         if(magicParryCd < 0)
         {
             magicParryCd = 0f;
-            cdText[3].text = " _/ ";
+            cdText[3].text = " E ";
         }
 
 

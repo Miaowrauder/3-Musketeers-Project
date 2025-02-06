@@ -62,6 +62,11 @@ public class plHealth : MonoBehaviour
 
     void Update()
     {
+
+        if(health > maxHealth)
+        {
+            health = maxHealth;
+        }
         
         if (Input.GetKeyDown(KeyCode.Mouse1) && meleeParryEnabled && (meleeParryLevel > 0) && !isMeleeParrying && (this.GetComponent<cooldownManager>().meleeParryCd <= 0) && (meleeIframes == 0))
         {
@@ -215,6 +220,7 @@ public class plHealth : MonoBehaviour
                 //upgraded effect
             }
 
+            ui.GetComponent<UImanager>().musketeerCharge += (4 + this.GetComponent<MusketeerAbilities>().musketeerLevel);
             incomingMagicDmg = 0;
             isMagicParrying = false;
             this.GetComponent<cooldownManager>().magicParryCd = 6f;
@@ -263,6 +269,7 @@ public class plHealth : MonoBehaviour
                 slash.GetComponent<DamageCollider>().canBreak = true;
             }
 
+            ui.GetComponent<UImanager>().musketeerCharge += (4 + this.GetComponent<MusketeerAbilities>().musketeerLevel);
             incomingMeleeDmg = 0;
             isMeleeParrying = false;
             this.GetComponent<cooldownManager>().meleeParryCd = 6f;

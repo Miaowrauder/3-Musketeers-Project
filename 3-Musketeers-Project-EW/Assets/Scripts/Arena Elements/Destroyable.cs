@@ -25,6 +25,7 @@ public class Destroyable : MonoBehaviour
         if((incomingDmg > 0f) && (isDamageable))
         {
             TakeDmg();
+            ui.GetComponent<UImanager>().canHitIndi = true;
         }
 
          if (iFrames > 0f)
@@ -52,6 +53,9 @@ public class Destroyable : MonoBehaviour
             {
               GameObject pickup = Instantiate(consumable[(Random.Range(0,consumable.Length))], shard0.transform.position, Quaternion.identity);
             }
+
+            GameObject pl = GameObject.FindWithTag("Player");
+            ui.GetComponent<UImanager>().musketeerCharge += (3 + pl.GetComponent<MusketeerAbilities>().musketeerLevel);
             Destroy(this.gameObject);
         }
     }

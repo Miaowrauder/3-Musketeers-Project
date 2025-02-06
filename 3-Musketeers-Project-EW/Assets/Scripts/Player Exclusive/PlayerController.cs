@@ -15,10 +15,12 @@ public class PlayerController : MonoBehaviour
     public GameObject playerHead;
 
     bool gravityActive;
+    GameObject ui;
 
     // Start is called before the first frame update
     void Start()
     {
+        ui = GameObject.FindWithTag("UImanager");
         gravityActive = true;
         moveSpeed = baseSpeed;
     }
@@ -51,11 +53,27 @@ public class PlayerController : MonoBehaviour
 
         if(speedyTicks < 1)
         {
-        controller.Move(movement * moveSpeed * Time.deltaTime);
+            if(ui.GetComponent<UImanager>().hasTrinket[10] == true) //slow invert
+            {
+                controller.Move(((movement * moveSpeed) / this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime);
+            }
+            else
+            {
+                controller.Move(((movement * moveSpeed) * this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime);
+            }
+            
         }
         else if(speedyTicks > 0)
         {  
-            controller.Move(movement * (moveSpeed*(speedyTicks/2)) * Time.deltaTime); 
+            if(ui.GetComponent<UImanager>().hasTrinket[10] == true) //slow invert
+            {
+                controller.Move(((movement * (moveSpeed*(speedyTicks/2))) / this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime); 
+            }
+            else
+            {
+                controller.Move(((movement * (moveSpeed*(speedyTicks/2))) * this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime); 
+            }
+            
             speedyTicks -= 1;
         }
 

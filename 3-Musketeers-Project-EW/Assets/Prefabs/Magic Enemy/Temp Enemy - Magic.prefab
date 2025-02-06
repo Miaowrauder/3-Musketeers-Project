@@ -2814,6 +2814,8 @@ MonoBehaviour:
   slashDuration: 0
   magicThing: {fileID: 5137949614910051611, guid: 03e7cf9174ba944459b91a01e95c8cbb,
     type: 3}
+  magicThing2: {fileID: 5137949614910051611, guid: 0e9969b14000890418b8db948e37d901,
+    type: 3}
   head: {fileID: 6357481947275978823}
   canSeePlayer: 0
   target: {fileID: 0}
@@ -2863,7 +2865,13 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  - 0
+  - 0
+  - 0
   DotDuration:
+  - 0
+  - 0
+  - 0
   - 0
   - 0
   - 0

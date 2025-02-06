@@ -7,13 +7,14 @@ public class Breakable : MonoBehaviour
     public float hp, maxHp;
     public float incomingDmg, iFrames;
     bool isDamageable, canCountdown;
-    public GameObject item, item2, gm;
+    public GameObject item, item2, gm, ui;
     // Start is called before the first frame update
     void Start()
     {
         hp = maxHp;
         canCountdown = true;
         gm = GameObject.Find("GameManager_DND");
+        ui = GameObject.FindWithTag("UImanager");
         item2.SetActive(false);
     }
 
@@ -23,6 +24,7 @@ public class Breakable : MonoBehaviour
         if((incomingDmg > 0f) && (isDamageable))
         {
             TakeDmg();
+            ui.GetComponent<UImanager>().canHitIndi = true;
         }
 
          if (iFrames > 0f)
@@ -38,6 +40,10 @@ public class Breakable : MonoBehaviour
             item.SetActive(false);
             item2.SetActive(true);
             gm.GetComponent<GameManager>().canBake = true;
+
+            GameObject ui = GameObject.FindWithTag("UImanager");
+            GameObject pl = GameObject.FindWithTag("Player");
+            ui.GetComponent<UImanager>().musketeerCharge += (6 + (pl.GetComponent<MusketeerAbilities>().musketeerLevel * 2));
             Destroy(this.gameObject);
         }
     }

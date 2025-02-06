@@ -12,27 +12,35 @@ public class StatusManager : MonoBehaviour
     public GameObject[] buffDebuffIcons;
     public Transform[] buffDebuffSlots;
 
+    bool one, two;
+
     public bool[] canSet;
     // Start is called before the first frame update
     void Start()
     {
+        one = true;
         ui = GameObject.FindWithTag("UImanager");
         isTicking = false;
-        DotDmg[0] = 0f;
-        DotDmg[1] = 0f;
-        DotDmg[2] = 0f;
-        DotDmg[3] = 0f;
 
-        DotDuration[0] = 0f;
-        DotDuration[1] = 0f;
-        DotDuration[3] = 0f;
+        for(int i = 0; i < DotDmg.Length; i++)
+        {
+            DotDmg[i] = 0f;
+        }
+        for(int i = 0; i < DotDuration.Length; i++)
+        {
+            DotDuration[i] = 0f;
+        }
+
+        DotDmg[4] = 1f;
+        DotDmg[5] = 1f;
+ 
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if( (((DotDuration[0]) > 0f) || ((DotDuration[1]) > 0f) || ((DotDmg[2]) > 0f) || ((DotDuration[3]) > 0f)) && (isTicking == false))
+        if( (((DotDuration[0]) > 0f) || ((DotDuration[1]) > 0f) || ((DotDmg[2]) > 0f) || ((DotDuration[3]) > 0f) || ((DotDuration[4]) > 0f) || ((DotDuration[5]) > 0f) || ((DotDuration[6]) > 0f)) && (isTicking == false))
         {
             StartCoroutine(tickDown());
         }
@@ -63,6 +71,37 @@ public class StatusManager : MonoBehaviour
             }
             DotDmg[3] = 0f;
         }
+
+        if(DotDuration[4] <= 0f)
+        {
+            if(!isEnemy)
+            {
+            canSet[4] = true;
+            }
+            DotDmg[4] = 1f;
+        }
+
+        if(DotDuration[5] <= 0f)
+        {
+            if(!isEnemy)
+            {
+            canSet[5] = true;
+            }
+            DotDmg[5] = 1f;
+        }
+
+        if(DotDuration[6] <= 0f) //fear, enemy exclusive
+        {
+            if(isEnemy && two)
+            {
+                this.GetComponent<UnityEngine.AI.NavMeshAgent>().speed = (this.GetComponent<UnityEngine.AI.NavMeshAgent>().speed * 10f);
+                two = false;//two does the same thing but to prevent this repeating instead
+                one = true; //one makes the speed flip only once per status get, preventing toggle on refresh;
+            }
+            
+        }
+
+
 
         // poison wearoff
         if(!isEnemy)
@@ -108,6 +147,11 @@ public class StatusManager : MonoBehaviour
                     self.GetComponent<plHealth>().health -= DotDmg[0];
                 }
 
+                if(self.GetComponent<MusketeerAbilities>().musketeerID == 2)
+                {
+                    ui.GetComponent<UImanager>().musketeerCharge += (1f + (self.GetComponent<MusketeerAbilities>().musketeerLevel / 2f));
+                }
+
                 if (self.GetComponent<PlayerController>().isSprinting == true)
                 {
                     DotDuration[0] -= 0.5f;
@@ -138,6 +182,11 @@ public class StatusManager : MonoBehaviour
                     self.GetComponent<plHealth>().health -= DotDmg[1];
                 }
 
+                if(self.GetComponent<MusketeerAbilities>().musketeerID == 2)
+                {
+                    ui.GetComponent<UImanager>().musketeerCharge += (0.5f + (self.GetComponent<MusketeerAbilities>().musketeerLevel / 2f));
+                }
+
             }
         }
 
@@ -147,6 +196,7 @@ public class StatusManager : MonoBehaviour
              self.GetComponent<Health>().hp -= DotDmg[2];         
         }
 
+        //regen
         if(DotDuration[3] >= 0.5f)
         {
             if(canSet[3] && (!isEnemy))
@@ -164,6 +214,57 @@ public class StatusManager : MonoBehaviour
                 self.GetComponent<plHealth>().health += DotDmg[3];
 
             }
+        }
+
+        //slow
+        if(DotDuration[4] >= 0.5f)
+        {
+            if(canSet[4] && (!isEnemy))
+            {
+                getStatus[4] = true;
+            }
+
+            if(self.GetComponent<MusketeerAbilities>().musketeerID == 2)
+            {
+                ui.GetComponent<UImanager>().musketeerCharge += (0.5f + (self.GetComponent<MusketeerAbilities>().musketeerLevel / 2f));
+            }
+
+            DotDuration[4] -= 0.5f;
+
+            //slow is applied in movement calculations, reasons for why in reflection
+        }
+
+        //weak
+        if(DotDuration[5] >= 0.5f)
+        {
+            if(canSet[5] && (!isEnemy))
+            {
+                getStatus[5] = true;
+            }
+            DotDuration[5] -= 0.5f;
+
+            if(self.GetComponent<MusketeerAbilities>().musketeerID == 2)
+            {
+                ui.GetComponent<UImanager>().musketeerCharge += (0.5f + (self.GetComponent<MusketeerAbilities>().musketeerLevel / 2f));
+            }
+
+            //weak is applied in attack scripts, same reason as slow
+        }
+        
+        //fear
+        if(DotDuration[6] >= 0.5f)
+        {
+            if(isEnemy)
+            {
+                if(one)
+                {
+                    this.GetComponent<UnityEngine.AI.NavMeshAgent>().speed -= (this.GetComponent<UnityEngine.AI.NavMeshAgent>().speed * 0.9f);
+                    one = false;
+                    two = true;
+                }
+            }
+            DotDuration[6] -= 0.5f;
+
         }
 
         yield return new WaitForSeconds(0.5f);
@@ -202,6 +303,16 @@ public class StatusManager : MonoBehaviour
         if(getStatus[3] && canSet[3])
         {
             buffDebuffID = 3;
+            BuffDebuff();
+        }
+        if(getStatus[4] && canSet[4])
+        {
+            buffDebuffID = 4;
+            BuffDebuff();
+        }
+        if(getStatus[5] && canSet[5])
+        {
+            buffDebuffID = 5;
             BuffDebuff();
         }
     }

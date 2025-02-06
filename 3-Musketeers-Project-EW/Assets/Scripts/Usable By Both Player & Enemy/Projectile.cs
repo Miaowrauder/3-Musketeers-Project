@@ -83,6 +83,9 @@ public class Projectile : MonoBehaviour
         }
         if (coll.tag == "Blocker")
         {
+            GameObject ui = GameObject.FindWithTag("UImanager");
+            ui.GetComponent<UImanager>().musketeerCharge += (4 + pl.GetComponent<MusketeerAbilities>().musketeerLevel);
+
             if(coll.transform.GetComponent<BlockCollider>().canDeflect == false)
             {
                 Destroy(self);

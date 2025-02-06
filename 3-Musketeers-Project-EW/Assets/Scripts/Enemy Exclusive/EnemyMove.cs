@@ -29,7 +29,7 @@ public class EnemyMove : MonoBehaviour
 
     [Header("Magic")]
 
-    public GameObject magicThing;
+    public GameObject magicThing, magicThing2;
     
 
 
@@ -147,6 +147,10 @@ public class EnemyMove : MonoBehaviour
             GameObject magic = Instantiate(magicThing, plObject.transform.position, Quaternion.identity);
             magic.GetComponent<Grenade>().isPrimed = true;
             magic.transform.parent = null;
+
+            GameObject magic2 = Instantiate(magicThing2, plObject.transform.position, Quaternion.identity);
+            magic2.GetComponent<Grenade>().isPrimed = true;
+            magic2.transform.parent = null;
         }
 
         

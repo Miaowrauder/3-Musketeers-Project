@@ -52,6 +52,10 @@ public class InteractableObject : MonoBehaviour
 
     void ShootBased()
     {
+        GameObject ui = GameObject.FindWithTag("UImanager");
+        GameObject pl = GameObject.FindWithTag("Player");
+            
+        ui.GetComponent<UImanager>().musketeerCharge += (12 + (pl.GetComponent<MusketeerAbilities>().musketeerLevel * 3));
         for (int i = 0; i < shootPos.Length; i++)
         {
             proj = Instantiate(shotObject, shootPos[i].transform.position, shootPos[i].transform.rotation);
