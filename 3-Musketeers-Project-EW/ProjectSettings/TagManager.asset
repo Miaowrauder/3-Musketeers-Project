@@ -23,6 +23,8 @@ TagManager:
   - MantleCollider
   - UImanager
   - Noise
+  - CollPickup
+  - TagSpawn
   layers:
   - Default
   - TransparentFX

@@ -25,6 +25,11 @@ public class Salve : MonoBehaviour
 
     void SalveEffects()
     {
+        if(pl.GetComponent<MusketeerAbilities>().musketeerID == 2)
+        {
+            GameObject ui = GameObject.FindWithTag("UImanager");
+            ui.GetComponent<UImanager>().musketeerCharge += (6f + (pl.GetComponent<MusketeerAbilities>().musketeerLevel*2));
+        }
         if(effectID == 0)
         {
             //burn

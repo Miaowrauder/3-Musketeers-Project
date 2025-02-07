@@ -17,7 +17,7 @@ public class Decay : MonoBehaviour
     
             transform.localScale = new Vector3(scale, scale, scale);
 
-            scale *= 0.999f;
+            scale *= 0.99f;
 
         if (scale <= 0.1f)
         {

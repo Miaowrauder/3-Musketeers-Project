@@ -82,7 +82,7 @@ public class LimbBehaviour : MonoBehaviour
         {
             transform.localScale = new Vector3(scale, scale, scale);
 
-            scale *= 0.999f;
+            scale *= 0.99f;
         
         }
 

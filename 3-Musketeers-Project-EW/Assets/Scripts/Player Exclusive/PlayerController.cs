@@ -55,11 +55,11 @@ public class PlayerController : MonoBehaviour
         {
             if(ui.GetComponent<UImanager>().hasTrinket[10] == true) //slow invert
             {
-                controller.Move(((movement * moveSpeed) / this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime);
+                controller.Move(((movement * (moveSpeed + (this.GetComponent<plHealth>().currentTags/12))) / this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime);
             }
             else
             {
-                controller.Move(((movement * moveSpeed) * this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime);
+                controller.Move(((movement * (moveSpeed + (this.GetComponent<plHealth>().currentTags/12))) * this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime);
             }
             
         }
@@ -67,11 +67,11 @@ public class PlayerController : MonoBehaviour
         {  
             if(ui.GetComponent<UImanager>().hasTrinket[10] == true) //slow invert
             {
-                controller.Move(((movement * (moveSpeed*(speedyTicks/2))) / this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime); 
+                controller.Move(((movement * ((moveSpeed + (this.GetComponent<plHealth>().currentTags/12))*(speedyTicks/2))) / this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime); 
             }
             else
             {
-                controller.Move(((movement * (moveSpeed*(speedyTicks/2))) * this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime); 
+                controller.Move(((movement * ((moveSpeed + (this.GetComponent<plHealth>().currentTags/12))*(speedyTicks/2))) * this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime); 
             }
             
             speedyTicks -= 1;

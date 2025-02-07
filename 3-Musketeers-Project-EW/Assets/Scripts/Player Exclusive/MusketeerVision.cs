@@ -5,7 +5,7 @@ using UnityEngine;
 public class MusketeerVision : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject[] breakables, destroyables, grenadePickups, salvePickups, interactables;
+    public GameObject[] breakables, destroyables, grenadePickups, salvePickups, interactables, collPickups;
     public GameObject beamPrefab;
     public Canvas overlay;
     bool canUp;
@@ -28,6 +28,7 @@ public class MusketeerVision : MonoBehaviour
             grenadePickups = GameObject.FindGameObjectsWithTag("GrenadePickup");
             salvePickups = GameObject.FindGameObjectsWithTag("ConsumablePickup");
             interactables = GameObject.FindGameObjectsWithTag("Interactable");
+            collPickups = GameObject.FindGameObjectsWithTag("CollPickup");
 
             for(int i = 0; i < breakables.Length; i++)
             {
@@ -48,6 +49,10 @@ public class MusketeerVision : MonoBehaviour
             for(int i = 0; i < interactables.Length; i++)
             {
                 GameObject beam = Instantiate(beamPrefab, interactables[i].transform.position, Quaternion.identity);;
+            }
+            for(int i = 0; i < collPickups.Length; i++)
+            {
+                GameObject beam = Instantiate(beamPrefab, collPickups[i].transform.position, Quaternion.identity);;
             }
 
             //Time.timeScale = 0.5f;
@@ -78,6 +83,10 @@ public class MusketeerVision : MonoBehaviour
             for(int i = 0; i < interactables.Length; i++)
             {
                 interactables[i] = null;
+            }
+            for(int i = 0; i < collPickups.Length; i++)
+            {
+                collPickups[i] = null;
             }
             
             //Time.timeScale = 1f;

@@ -45,8 +45,13 @@ public class plHealth : MonoBehaviour
 
     public GameObject melIcon, ranIcon, magIcon; //dont assign
 
+    [Header("Diamond Tags")]
+
+    public int minTags, currentTags;
+
     void Start()
     {
+        
         ui = GameObject.FindWithTag("UImanager");
         health = maxHealth;
         healthSlider.maxValue = health;
@@ -62,6 +67,11 @@ public class plHealth : MonoBehaviour
 
     void Update()
     {
+        if(currentTags == 10)
+        {
+            currentTags += 2;
+            minTags += 2;
+        }
 
         if(health > maxHealth)
         {
@@ -194,6 +204,11 @@ public class plHealth : MonoBehaviour
             incomingMagicDmg = 0;
             isMagicable = false;
 
+            if(currentTags > minTags)
+            {
+                currentTags -= 1;
+            }
+
             if(hasLetterBuff)
             {
                 hasLetterBuff = false;
@@ -255,6 +270,11 @@ public class plHealth : MonoBehaviour
             isMeleeable = false;
         }
 
+        if(currentTags > minTags)
+            {
+                currentTags -= 1;
+            }
+
         }
 
         if(isMeleeParrying)
@@ -299,6 +319,11 @@ public class plHealth : MonoBehaviour
             health -= (incomingRangedDmg -= (defenceStat/2f));
             incomingRangedDmg = 0;
             isRangedable = false;
+        }
+
+        if(currentTags > minTags)
+        {
+            currentTags -= 1;
         }
 
     }

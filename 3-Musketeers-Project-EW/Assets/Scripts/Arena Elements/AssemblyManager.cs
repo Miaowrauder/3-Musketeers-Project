@@ -5,7 +5,8 @@ using UnityEngine;
 public class AssemblyManager : MonoBehaviour
 {
     public Transform leftPos, rightPos, featurePos, bossPos;
-    public GameObject[] halfPrefab, featurePrefab0, featurePrefab1, featurePrefab2, environment1, environment2, destroyables, breakables, bossPrefab;
+    public GameObject[] halfPrefab, featurePrefab0, featurePrefab1, featurePrefab2, environment1, environment2, destroyables, breakables, bossPrefab, tagSpots;
+    public GameObject tagPrefab;
     public bool isBoss;
     public Material[] materials1, materials2;
 
@@ -126,6 +127,19 @@ public class AssemblyManager : MonoBehaviour
             }
 
         }
+
+        if((ui.GetComponent<UImanager>().hasTrinket[3] == true) && (!isBoss))
+        {
+            tagSpots = GameObject.FindGameObjectsWithTag("TagSpawn");
+            int totalTags = 3;
+
+            for(int i = 0; i < totalTags; i++)
+            {
+                int j = Random.Range(0, tagSpots.Length);
+                Instantiate(tagPrefab, tagSpots[j].transform.position, Quaternion.identity);
+            }
+        }
+        
         
 
     }

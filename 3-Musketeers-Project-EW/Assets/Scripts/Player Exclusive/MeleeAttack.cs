@@ -17,8 +17,10 @@ public class MeleeAttack : MonoBehaviour
     [Header("PlayerStats")]
     public float damageStat;
     public float attackSpeedStat;
-    [Header("PlayerStats")]
+    [Header("Misc")]
     public GameObject ui;
+
+    public bool porthosAb;
 
     
 
@@ -55,13 +57,13 @@ public class MeleeAttack : MonoBehaviour
         {
             if(ui.GetComponent<UImanager>().hasTrinket[9]) //inverts weakness
             {
-                hitbox.GetComponent<DamageCollider>().meleeDmg = (((damageStat + 15f)*0.7f) / this.GetComponent<StatusManager>().DotDmg[5]);
-                hitbox.GetComponent<DamageCollider>().magicDmg = ((damageStat + 15f)*0.3f);
+                hitbox.GetComponent<DamageCollider>().meleeDmg = (((damageStat + 15f + (this.GetComponent<plHealth>().currentTags*3))*0.7f) / this.GetComponent<StatusManager>().DotDmg[5]);
+                hitbox.GetComponent<DamageCollider>().magicDmg = ((damageStat + 15f + (this.GetComponent<plHealth>().currentTags*3))*0.3f);
             }
             else
             {
-                hitbox.GetComponent<DamageCollider>().meleeDmg = (((damageStat + 15f)*0.7f) * this.GetComponent<StatusManager>().DotDmg[5]);
-                hitbox.GetComponent<DamageCollider>().magicDmg = ((damageStat + 15f)*0.3f);
+                hitbox.GetComponent<DamageCollider>().meleeDmg = (((damageStat + 15f + (this.GetComponent<plHealth>().currentTags*3))*0.7f) * this.GetComponent<StatusManager>().DotDmg[5]);
+                hitbox.GetComponent<DamageCollider>().magicDmg = ((damageStat + 15f + (this.GetComponent<plHealth>().currentTags*3))*0.3f);
             }
             
         }
@@ -73,27 +75,53 @@ public class MeleeAttack : MonoBehaviour
         {
             if(ui.GetComponent<UImanager>().hasTrinket[9]) //inverts weakness
             {
-                hitbox.GetComponent<DamageCollider>().meleeDmg = ((damageStat + 15f) / this.GetComponent<StatusManager>().DotDmg[5]);
+                hitbox.GetComponent<DamageCollider>().meleeDmg = ((damageStat + 15f + (this.GetComponent<plHealth>().currentTags*3)) / this.GetComponent<StatusManager>().DotDmg[5]);
             }
             else
             {
-                hitbox.GetComponent<DamageCollider>().meleeDmg = ((damageStat + 15f) * this.GetComponent<StatusManager>().DotDmg[5]);
+                hitbox.GetComponent<DamageCollider>().meleeDmg = ((damageStat + 15f + (this.GetComponent<plHealth>().currentTags*3)) * this.GetComponent<StatusManager>().DotDmg[5]);
             }
             
         }
-        
+
+        if(porthosAb)
+        {
+            hitbox.GetComponent<DamageCollider>().meleeDmg *= 1.5f;
+            hitbox.GetComponent<DamageCollider>().magicDmg *= 1.5f;
+        }
         
         hitbox.GetComponent<DamageCollider>().lifespan = (attackSpeedStat * 0.2f);
         hitbox.GetComponent<DamageCollider>().scale = (hitboxScale);
         hitbox.GetComponent<DamageCollider>().canBreak = true;
 
+        if(porthosAb)
+        {
+
+        }
+
         this.GetComponent<PlayerInteractions>().castTime = true;
 
-        yield return new WaitForSeconds(attackSpeedStat * 0.2f);
+        if(porthosAb)
+        {
+            yield return new WaitForSeconds(attackSpeedStat * 0.15f);
+        }
+        else if (!porthosAb)
+        {
+            yield return new WaitForSeconds(attackSpeedStat * 0.2f);
+        }
+        
 
         swordArm.transform.position = (pullPos[2].transform.position);
 
-        yield return new WaitForSeconds(attackSpeedStat * 0.1f);
+        if(porthosAb)
+        {
+            yield return new WaitForSeconds(attackSpeedStat * 0.075f);
+        }
+        else if (!porthosAb)
+        {
+            yield return new WaitForSeconds(attackSpeedStat * 0.1f);
+        }
+
         currentlyAttacking = false;
 
     }

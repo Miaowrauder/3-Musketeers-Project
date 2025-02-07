@@ -78,6 +78,8 @@ public class Health : MonoBehaviour
         if(this.GetComponent<EnemyMove>().canSeePlayer == false)
         {
             incomingDmg *= 2f;
+            GameObject pl = GameObject.FindWithTag("Player");
+            ui.GetComponent<UImanager>().musketeerCharge += (4f + (pl.GetComponent<MusketeerAbilities>().musketeerLevel*2));
         } 
 
         if(!isBoss)

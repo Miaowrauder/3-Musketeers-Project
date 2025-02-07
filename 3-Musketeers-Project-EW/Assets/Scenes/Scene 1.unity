@@ -567,7 +567,12 @@ MonoBehaviour:
   - {fileID: 1646572486781582537, guid: 843fb8bc86fe012489a1e67b80f26179, type: 3}
   environment1: []
   environment2: []
+  destroyables: []
+  breakables: []
   bossPrefab: []
+  tagSpots: []
+  tagPrefab: {fileID: 9146454586190145552, guid: f28eebc473a847243a2d048cd4c8a360,
+    type: 3}
   isBoss: 0
   materials1:
   - {fileID: 2100000, guid: 6ba8c0b7b8f6af54b8dd7117edb0b14f, type: 2}
