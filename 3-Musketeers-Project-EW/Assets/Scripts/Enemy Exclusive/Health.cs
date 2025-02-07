@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float hp;
-    float maxHp;
+    public float maxHp;
     public float iFrames;
     public float incomingDmg;
     public bool isDamageable, isBoss;

@@ -190,7 +190,7 @@ public class UImanager : MonoBehaviour
         sceneNumber +=1;
         loadingCanvas.enabled = true;
         //modulus was NOT working at all, I tried so many ways and this was a last resort...
-        if((sceneNumber == 3) || (sceneNumber == 6) || (sceneNumber == 9) || (sceneNumber == 12) || (sceneNumber == 15) || (sceneNumber == 18) || (sceneNumber == 32))
+        if((sceneNumber == 3) || (sceneNumber == 6) || (sceneNumber == 9) || (sceneNumber == 12) || (sceneNumber == 15) || (sceneNumber == 18) || (sceneNumber == 21))
         {
             bossBits.transform.position = new Vector3 (bossBits.transform.position.x, bossBits.transform.position.y-120, bossBits.transform.position.z);
             SceneManager.LoadScene("Scene 2");
