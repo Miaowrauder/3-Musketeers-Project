@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    public bool isActivated, canActivate;
+    public bool isActivated, canActivate, isGrenade, isProjectile;
     public float delay;
     public Transform[] shootPos;
     public GameObject shotObject;
@@ -59,11 +59,15 @@ public class InteractableObject : MonoBehaviour
         for (int i = 0; i < shootPos.Length; i++)
         {
             proj = Instantiate(shotObject, shootPos[i].transform.position, shootPos[i].transform.rotation);
-
-            proj.GetComponent<Grenade>().isPrimed = true;
             proj.gameObject.transform.parent = null;
-            proj.gameObject.GetComponent<Rigidbody>().AddForce(proj.transform.forward * 5, ForceMode.Impulse);    
-            proj.gameObject.GetComponent<Rigidbody>().AddForce(proj.transform.up * (5), ForceMode.Impulse);
+
+            if(isGrenade)
+            {
+                proj.GetComponent<Grenade>().isPrimed = true;
+                proj.gameObject.GetComponent<Rigidbody>().AddForce(proj.transform.forward * 5, ForceMode.Impulse);    
+                proj.gameObject.GetComponent<Rigidbody>().AddForce(proj.transform.up * (5), ForceMode.Impulse);
+            }
+            
         }
     }
 }

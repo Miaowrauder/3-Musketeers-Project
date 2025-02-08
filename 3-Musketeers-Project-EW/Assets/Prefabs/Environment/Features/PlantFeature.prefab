@@ -17844,7 +17844,7 @@ Transform:
   m_GameObject: {fileID: 7272573865059367820}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5079037, y: 0.3890631, z: 0.5904489, w: 0.49196938}
-  m_LocalPosition: {x: 2.666664, y: 14.14, z: 14.7}
+  m_LocalPosition: {x: 2.54, y: 14, z: 15.35}
   m_LocalScale: {x: 11.085287, y: 12.271415, z: 11.085288}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20394,6 +20394,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActivated: 0
   canActivate: 1
+  isGrenade: 1
+  isProjectile: 0
   delay: 1
   shootPos:
   - {fileID: 2894273980969035570}

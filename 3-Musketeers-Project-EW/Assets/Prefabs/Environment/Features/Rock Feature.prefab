@@ -726,7 +726,7 @@ GameObject:
   - component: {fileID: 4060737540805317315}
   - component: {fileID: 7816517994773452509}
   m_Layer: 0
-  m_Name: Statue Feature
+  m_Name: Rock Feature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
