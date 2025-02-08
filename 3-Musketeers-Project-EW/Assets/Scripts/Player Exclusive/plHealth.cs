@@ -69,8 +69,8 @@ public class plHealth : MonoBehaviour
     {
         if(currentTags == 10)
         {
-            currentTags += 2;
             minTags += 2;
+            currentTags = minTags;
         }
 
         if(health > maxHealth)
