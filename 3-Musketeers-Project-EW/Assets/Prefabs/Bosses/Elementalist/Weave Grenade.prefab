@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07c4961d11d218498472f5f254fc8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuseDelay: 2
+  fuseDelay: 1
   self: {fileID: 8287143858823571816}
   boomPrefab: {fileID: 997548010501389944, guid: 3eb315bb4a1963c46a8dd7bf518fa482,
     type: 3}

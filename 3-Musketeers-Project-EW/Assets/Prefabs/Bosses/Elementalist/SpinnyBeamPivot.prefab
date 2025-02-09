@@ -1943,7 +1943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 132d8005285b93e4ba24bdd7aa1dea35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinSpeed: 3
+  spinSpeed: 4.5
   forwardRoll: 0
   cartWheel: 0
   lazySusan: 1

@@ -124,7 +124,7 @@ MonoBehaviour:
   isDestroying: 0
   isHoming: 0
   lifespan: 5
-  moveSpeed: 10
+  moveSpeed: 15
   rangedDmg: 0
   magicDmg: 30
   self: {fileID: 2880356632519871233}

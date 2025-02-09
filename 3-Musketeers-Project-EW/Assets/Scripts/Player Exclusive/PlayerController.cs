@@ -67,11 +67,11 @@ public class PlayerController : MonoBehaviour
         {  
             if(ui.GetComponent<UImanager>().hasTrinket[10] == true) //slow invert
             {
-                controller.Move(((movement * ((moveSpeed + (this.GetComponent<plHealth>().currentTags/12))*(speedyTicks/2))) / this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime); 
+                controller.Move(((movement * ((moveSpeed + (this.GetComponent<plHealth>().currentTags/12))*(speedyTicks/3))) / this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime); 
             }
             else
             {
-                controller.Move(((movement * ((moveSpeed + (this.GetComponent<plHealth>().currentTags/12))*(speedyTicks/2))) * this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime); 
+                controller.Move(((movement * ((moveSpeed + (this.GetComponent<plHealth>().currentTags/12))*(speedyTicks/3))) * this.GetComponent<StatusManager>().DotDmg[4]) * Time.deltaTime); 
             }
             
             speedyTicks -= 1;
@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour
             noiseZone.GetComponent<NoiseScaler>().scale -= 3f;
             if(isSprinting && (this.GetComponent<cooldownManager>().dodgeCd <= 0))
             {
-                speedyTicks = 45;
+                speedyTicks = 20;
                 this.GetComponent<cooldownManager>().dodgeCd = 2;
             }
             isCrouching = true;
