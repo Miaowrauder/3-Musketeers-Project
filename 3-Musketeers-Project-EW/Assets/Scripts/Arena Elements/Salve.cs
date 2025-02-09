@@ -38,7 +38,10 @@ public class Salve : MonoBehaviour
             pl.GetComponent<StatusManager>().DotDuration[1] = 0f;
             //regen (yes it cleanses EVERYTHING deal with it)
             pl.GetComponent<StatusManager>().DotDuration[3] = 0f;
-
+            //slow and weak respectively
+            pl.GetComponent<StatusManager>().DotDuration[4] = 0f;
+            pl.GetComponent<StatusManager>().DotDuration[5] = 0f;
+            
             pl.GetComponent<OffhandFunctions>().isConsuming = false;
             pl.GetComponent<OffhandFunctions>().hasSalve = false;
 

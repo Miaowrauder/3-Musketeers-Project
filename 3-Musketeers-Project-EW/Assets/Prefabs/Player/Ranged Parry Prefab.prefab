@@ -120,9 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   self: {fileID: 8905666570851080222}
+  player: {fileID: 0}
   isDestroying: 0
   lifespan: 0
-  canDeflect: 1
+  canDeflect: 0
   deflectionDirection: {fileID: 5125129410584112391}
 --- !u!1 &9028700671373787800
 GameObject:
