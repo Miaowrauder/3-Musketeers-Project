@@ -26,7 +26,7 @@ public class cooldownManager : MonoBehaviour
         if(choiceCD < 0)
         {
             choiceCD = 0f;
-            cdText[0].text = " F ";
+            cdText[0].text = " T ";
         }
         if(rangedParryCd < 0)
         {

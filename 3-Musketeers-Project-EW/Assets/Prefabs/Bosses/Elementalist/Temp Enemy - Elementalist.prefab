@@ -1162,13 +1162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2954f9e10c078640b32e481d996e29b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 500
+  hp: 750
+  maxHp: 0
   iFrames: 0
   incomingDmg: 0
   isDamageable: 0
   isBoss: 1
   canCountdown: 0
-  dmgRecievedMult: 0.5
+  dmgRecievedMult: 0.4
   alertPrefab: {fileID: 0}
 --- !u!114 &6048765297945662165
 MonoBehaviour:
