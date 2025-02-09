@@ -19,7 +19,7 @@ public class MusketeerAbilities : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R) && (ui.GetComponent<UImanager>().musketeerCharge == 100))
+        if(Input.GetKeyDown(KeyCode.R) && (ui.GetComponent<UImanager>().musketeerCharge == 100) && (musketeerID > 0))
         {
             ui.GetComponent<UImanager>().musketeerCharge = 0;
             ui.GetComponent<UImanager>().canSet = true;
