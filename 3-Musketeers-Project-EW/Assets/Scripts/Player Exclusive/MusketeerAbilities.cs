@@ -77,6 +77,7 @@ public class MusketeerAbilities : MonoBehaviour
                 enemies[i].GetComponent<EnemyMove>().canSeePlayer = true;
                 enemies[i].GetComponent<EnemyMove>().mainhandEnabled = false;
                 enemies[i].GetComponent<EnemyMove>().offhandEnabled = false;
+                enemies[i].GetComponent<UnityEngine.AI.NavMeshAgent>().stoppingDistance *= 0.1f;
             }
             yield return new WaitForSeconds(delay);
             this.GetComponent<plHealth>().health = this.GetComponent<plHealth>().maxHealth;
@@ -90,6 +91,7 @@ public class MusketeerAbilities : MonoBehaviour
             {
                 enemies[i].GetComponent<EnemyMove>().mainhandEnabled = true;
                 enemies[i].GetComponent<EnemyMove>().offhandEnabled = true;
+                enemies[i].GetComponent<UnityEngine.AI.NavMeshAgent>().stoppingDistance *= 10f;
             }
         }
         
