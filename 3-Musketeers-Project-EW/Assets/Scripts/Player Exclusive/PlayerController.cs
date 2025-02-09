@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
 
     void Crouch()
     {
-        if(Input.GetKeyDown(KeyCode.LeftControl))
+        if(Input.GetKeyDown(KeyCode.C))
         {
             noiseZone.GetComponent<NoiseScaler>().scale -= 3f;
             if(isSprinting && (this.GetComponent<cooldownManager>().dodgeCd <= 0))
@@ -198,7 +198,7 @@ public class PlayerController : MonoBehaviour
             this.GetComponent<CharacterController>().height = 0.6f;
             transform.localScale = new Vector3(0.8f, 0.4f, 0.8f);  
         }
-        if(Input.GetKeyUp(KeyCode.LeftControl))
+        if(Input.GetKeyUp(KeyCode.C))
         {
             noiseZone.GetComponent<NoiseScaler>().scale += 3f;
             speedyTicks = 0;
