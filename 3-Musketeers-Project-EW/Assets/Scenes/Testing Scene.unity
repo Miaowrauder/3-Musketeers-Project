@@ -6130,7 +6130,7 @@ PrefabInstance:
     - target: {fileID: 571931133206792858, guid: bca4e440d47495d4da38f899395ee43a,
         type: 3}
       propertyPath: attackDelay
-      value: 999
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1429763879309118553, guid: bca4e440d47495d4da38f899395ee43a,
         type: 3}

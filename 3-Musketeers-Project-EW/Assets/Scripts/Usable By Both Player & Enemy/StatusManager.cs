@@ -95,6 +95,7 @@ public class StatusManager : MonoBehaviour
             if(isEnemy && two)
             {
                 this.GetComponent<UnityEngine.AI.NavMeshAgent>().speed = (this.GetComponent<UnityEngine.AI.NavMeshAgent>().speed * 10f);
+                this.GetComponent<EnemyMove>().attackDelay = (this.GetComponent<EnemyMove>().attackDelay / 2);
                 two = false;//two does the same thing but to prevent this repeating instead
                 one = true; //one makes the speed flip only once per status get, preventing toggle on refresh;
             }
@@ -259,6 +260,7 @@ public class StatusManager : MonoBehaviour
                 if(one)
                 {
                     this.GetComponent<UnityEngine.AI.NavMeshAgent>().speed -= (this.GetComponent<UnityEngine.AI.NavMeshAgent>().speed * 0.9f);
+                    this.GetComponent<EnemyMove>().attackDelay = (this.GetComponent<EnemyMove>().attackDelay * 2);
                     one = false;
                     two = true;
                 }

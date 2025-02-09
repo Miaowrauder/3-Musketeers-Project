@@ -14,7 +14,7 @@ public class CloudController : MonoBehaviour
     {
         this.transform.parent = null;
         effectCollider = Instantiate(effectCollPrefab, this.transform.position, Quaternion.identity);
-        effectCollider.GetComponent<RainCollider>().statusDuration = 1f;
+        effectCollider.GetComponent<RainCollider>().statusDuration = 5f;
         effectCollider.GetComponent<RainCollider>().regenPerSec = regenPerSec;
     }
 
